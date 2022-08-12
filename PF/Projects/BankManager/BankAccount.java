@@ -1,4 +1,4 @@
-package FundamentalPrograming.Projects.BankManager;
+package PF.Projects.BankManager;
 
 
 public class BankAccount {

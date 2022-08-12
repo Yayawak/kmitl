@@ -1,4 +1,4 @@
-package FundamentalPrograming.Playground;
+package PF.Playground;
 
 import java.util.Scanner;
 
