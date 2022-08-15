@@ -14,7 +14,7 @@ public class App {
                 // if(CountPrime.isPrime2(n)) counter++;
             }
             long time = (System.currentTimeMillis() - start);
-            System.out.printf("%d\t %d\t %d", N, counter, time);
+            System.out.printf("N : %d\tCounts : %d\tTimes : %d\n", N, counter, time);
         }
 
     // public static void main(String[] args) {
