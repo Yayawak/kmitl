@@ -1,3 +1,5 @@
+package salesBonusCalculatorFolder;
+
 public class salesBonusCalculator {
 	public static void main(String[] args) {
 		double sales = Double.valueOf(args[0]);
