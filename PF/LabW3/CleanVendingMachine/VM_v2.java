@@ -1,4 +1,4 @@
-package PF.LabW3.Lab3Q3.CleanVendingMachine;
+package PF.LabW3.CleanVendingMachine;
 
 import java.util.Scanner;
 

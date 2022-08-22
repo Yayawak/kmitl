@@ -1,4 +1,6 @@
-package salesBonusCalculatorFolder;
+package SalesBonusCalculatorFolder;
+// package SalesBonusCalculatorFolder;
+
 
 public class salesBonusCalculator {
 	public static void main(String[] args) {

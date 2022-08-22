@@ -1,4 +1,4 @@
-package salesBonusWithUI;
+package SalesBonusWithUI;
 
 public class Logic {
     double sales; 
