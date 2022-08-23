@@ -1,4 +1,4 @@
-package SalesBonusWithUI;
+package PF.LabW2.SalesBonusWithUI;
 
 public class Logic {
     double sales; 

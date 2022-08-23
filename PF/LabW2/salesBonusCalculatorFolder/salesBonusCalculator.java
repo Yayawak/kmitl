@@ -1,4 +1,4 @@
-package SalesBonusCalculatorFolder;
+package PF.LabW2.SalesBonusCalculatorFolder;
 // package SalesBonusCalculatorFolder;
 
 

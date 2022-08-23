@@ -1,3 +1,4 @@
+package PF.LabW2.SalesBonusWithUI;
 
 import javax.swing.*;
 import java.awt.*;
