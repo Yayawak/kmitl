@@ -1,8 +1,8 @@
 package JavaLearner.Collections.Vector;
 
-import java.lang.reflect.Array;
+// import java.lang.reflect.Array;
 import java.util.Arrays;
-import java.util.Enumeration;
+// import java.util.Enumeration;
 import java.util.Vector;
 
 public class BasicVector {
@@ -11,7 +11,7 @@ public class BasicVector {
         String[] arr = "Sunday,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday".toUpperCase().split(",");
         dayNames.addAll(Arrays.asList(arr));
 
-        Enumeration<String> days = dayNames.elements();
+        // Enumeration<String> days = dayNames.elements();
         int i = 0;
         // while (days.hasMoreElements()) {
         while (i < dayNames.size()) {

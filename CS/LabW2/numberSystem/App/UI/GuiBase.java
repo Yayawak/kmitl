@@ -1,7 +1,6 @@
 package CS.LabW2.numberSystem.App.UI;
 
 import javax.swing.*;
-import java.awt.FlowLayout;
 
 public class GuiBase extends JFrame {
     private JPanel jContentPane = null;
@@ -34,7 +33,7 @@ public class GuiBase extends JFrame {
             JTextArea converted_number_ta = new JTextArea("..........");
 
             // ? ================= ADDING TO PANELS ================
-            
+
             decimalPanel.add(decimal_number_lb);
             decimalPanel.add(decimal_ta);
 
@@ -48,7 +47,7 @@ public class GuiBase extends JFrame {
             // frame.add(basePanel);
             // add(basePanel);
 
-            // jContentPane.add(basePanel);            
+            // jContentPane.add(basePanel);
             // pack();
 
         }

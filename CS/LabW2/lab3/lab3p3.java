@@ -16,5 +16,6 @@ public class lab3p3 {
 
         int r = a - b*quotient;
         System.out.println("Remainder is : " + r);
+        sc.close();
     }
 }

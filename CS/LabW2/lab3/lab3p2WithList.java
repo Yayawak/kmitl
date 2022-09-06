@@ -2,11 +2,10 @@ package CS.LabW2.lab3;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class lab3p2WithList {
     public static void main(String[] args)  {
-        int initVal = 9;         
+        int initVal = 9;
 
         List<Integer> list = new ArrayList<Integer>();
         // int elements = new Random().nextInt(100);

@@ -5,7 +5,7 @@ public class checkboard {
         int startTile = 0;
         int lastTile = 80;
         int currentTile = startTile;
-        int tileCount = 0;
+        // int tileCount = 0;
         while (currentTile < lastTile) {
             if(currentTile % 5 == 0) {
                 System.out.print("| O | " + "\t");
@@ -17,10 +17,10 @@ public class checkboard {
             }
             currentTile++;
 
-            tileCount = (currentTile + 1) % 10;
+            // tileCount = (currentTile + 1) % 10;
             if(currentTile ==0) {
                 System.out.println();
             }
-        } 
+        }
     }
 }

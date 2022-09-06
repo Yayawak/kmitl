@@ -12,10 +12,12 @@ public class BankApp {
         String name = "Will";
         String customerId = "00009999";
         System.out.println(name + " " + customerId);
-        
+
         BankAccount ba = new BankAccount(name, customerId);
         System.out.println(ba);
         // System.out.println(new BankAccount(name, customerId));
+
+        sc.close();
     }
 
 }

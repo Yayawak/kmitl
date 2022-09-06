@@ -1,7 +1,7 @@
 package JavaLearner.Collections.MapInterface.TreeMap;
 
 import java.util.Iterator;
-import java.util.Map;
+// import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.Map.Entry;
@@ -18,13 +18,13 @@ public class usingTree {
         Iterator<Entry<String, Integer>> iter = set.iterator();
 
         while (iter.hasNext()) {
-            Map.Entry me = (Map.Entry) iter.next();
-            System.out.print("key = " + me.getKey() + " , ");            
-            System.out.println("value = " + me.getValue());
+            // Map.Entry me = (Map.Entry) iter.next();
+            // System.out.print("key = " + me.getKey() + " , ");
+            // System.out.println("value = " + me.getValue());
 
             // System.out.print(iter.next().toString());
         }
         // System.out.println(priorityAnimalTree.descendingKeySet());
-        
+
     }
 }

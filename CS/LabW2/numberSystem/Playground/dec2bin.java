@@ -9,5 +9,6 @@ public class dec2bin {
         int dec = Integer.parseInt(sc.nextLine());
 
         System.out.println(dec);
-    }    
+        sc.close();
+    }
 }

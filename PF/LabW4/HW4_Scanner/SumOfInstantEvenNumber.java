@@ -18,6 +18,8 @@ public class SumOfInstantEvenNumber {
                 System.out.printf("Summary of even numbers is : %d\n", sum);
             }else {
                 System.out.println();
+                // ? Maybe bug here
+                sc.close();
             }
         }
     }

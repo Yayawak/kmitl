@@ -13,7 +13,7 @@ public class VendingMachine {
 
         while (true) {
             // money <= 0 ? break : continue ;
-        
+
             int rem10 = money % 10;
             money -= 10;
             c10++;
@@ -22,7 +22,7 @@ public class VendingMachine {
             if (money < 10 ) {
                 int rem5 = money % 5;
                 money -= 5;
-                if (money > 0) c5++; 
+                if (money > 0) c5++;
                 if (money <= 0) break;
                 printOut(money, rem5, 5);
 
@@ -36,6 +36,7 @@ public class VendingMachine {
             }
         }
         System.out.printf("c10 : %d\nc5 : %d\n c1 : %d\n", c10, c5, c1);
+        sc.close();
     }
     private static void printOut(int money, int rem, int coinType) {
         System.out.println("money : " + money);

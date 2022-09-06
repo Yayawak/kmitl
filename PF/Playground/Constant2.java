@@ -8,7 +8,7 @@ public class Constant2 {
         int[] n = new int[SIZE];
 
         Scanner reader = new Scanner(System.in);
-    
+
         for(int i=0; i< SIZE; i++) {
             System.out.print("n[" + i + "] = " );
             n[i] = reader.nextInt();
@@ -18,5 +18,7 @@ public class Constant2 {
         for (int i=0; i < SIZE; i++ ){
             System.out.print(n[i] + ", ");
         }
+
+        reader.close();
     }
 }
