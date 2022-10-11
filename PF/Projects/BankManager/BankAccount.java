@@ -5,7 +5,7 @@ public class BankAccount {
     double balance; // current money
     double prevTrans;
     String customerName;
-    String customerId;    
+    String customerId;
 
     BankAccount(String customerName, String customerId) {
         this.customerId = customerId;
