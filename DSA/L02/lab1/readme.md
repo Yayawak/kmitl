@@ -1,3 +1,0 @@
-# Empirical Analysis
-
-# Mathematical proof

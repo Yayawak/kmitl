@@ -1,0 +1,20 @@
+Secret is : 1234
+Decrypted with threshold = 3polynomial is : 	1234.0 290.5 183.5
+
+
+Secret is : 555
+Decrypted with threshold = 2polynomial is : 	555.0 260.0
+
+
+Secret is : 999
+Decrypted with threshold = 4polynomial is : 	998.9999999999986 44.333333333334394 768.4999999999997 74.16666666666666
+
+
+Secret is : 123
+Decrypted with threshold = 3polynomial is : 	1271.6666666666665 1259.5 1143.8333333333335
+
+
+Secret is : 1010
+Decrypted with threshold = 3polynomial is : 	1010.0 474.16666666666674 162.83333333333331
+
+
