@@ -1,8 +1,8 @@
-package Round2.Warp;
+// package Round2.WarpP3;
 // import java.util.Arrays;
 import java.util.Scanner;
 
-public class Main {
+public class Old {
     static Scanner scanner = new Scanner(System.in);
     static int[] getKeyboardInput(int size, String desc)
     {
@@ -18,8 +18,10 @@ public class Main {
     public static void main(String[] args) throws Exception {
 
         int[] RC = getKeyboardInput(2, "Enter number of row & column : ");
-        if (RC[0] < 5) throw new Exception("r must >= 5");
-        if (!(RC[1] > 1 && RC[1] < 500)) throw new Exception("c must be in between 0 to 500");
+        // if (RC[0] < 5) throw new Exception("r must >= 5");
+        if (RC[0] < 5) return;
+        // if (!(RC[1] > 1 && RC[1] < 500)) throw new Exception("c must be in between 0 to 500");
+        if (!(RC[1] > 1 && RC[1] < 500)) return;
         // int[] RC = {6, 10};
         int[][] grid = new int[RC[0]][RC[1]];
         for (int i = 0; i < RC[0]; i++)
@@ -42,7 +44,8 @@ public class Main {
         System.out.printf("%d %d\n",
             startWarpPos[0] + 1, startWarpPos[1] + 1
             );
-        System.out.printf("%d %d\n",
+        // System.out.printf("%d %d\n",
+        System.out.printf("%d %d",
             endWarpPos[0] + 1, endWarpPos[1] + 1
             );
         // System.out.println(

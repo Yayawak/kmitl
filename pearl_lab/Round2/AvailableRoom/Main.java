@@ -16,6 +16,8 @@ class Main
     }
     public static void main(String[] args) {
         int N = getKeyboardInput(1, "Enter Number of rooms")[0];
+        // if (!(N <= 100)) return;
+        if (!(0 < N && N <= 100)) return ;
         // System.out.println("Enter each year commitment time : ");
         // int years = scanner.nextInt();
         int[] yearsArr = getKeyboardInput(N, "");
@@ -69,6 +71,8 @@ class Main
                         ? "" : " ";
                         // ? "" : "_";
                     System.out.printf("%d" + endStr, outputMtxToPrint[i][j]);
+                    // if (i == outputMtxToPrint.length)
+                        // System.out.println(" ");
                 }
                 else
                 {
@@ -77,10 +81,18 @@ class Main
 
                 if (countEmptyInRow == outputMtxToPrint[0].length)
                 {
-                    System.out.printf("full");
+                    System.out.printf("full\n");
                 }
             }
-            System.out.println();
+            if (i != outputMtxToPrint.length - 1)
+                System.out.println();
         }
     }
 }
+// full
+// 1 3
+// 1 2 3
+
+// 3 4 10
+// 1 3 4 5 6 7 10
+// 1 2 3 4 5 6 7 8 9 10
