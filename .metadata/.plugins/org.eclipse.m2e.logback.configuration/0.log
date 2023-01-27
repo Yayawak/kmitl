@@ -1,9 +1,0 @@
-2022-10-05 12:15:30,595 [Worker-10: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
-2022-10-05 12:15:59,475 [Start Help Server] INFO  org.eclipse.jetty.server.Server - jetty-10.0.9; built: 2022-03-30T16:46:32.527Z; git: a9eaf8d5d73369acf610ce88f850c0d56c4b1113; jvm 17.0.4+8
-2022-10-05 12:15:59,556 [Start Help Server] INFO  o.e.j.s.s.DefaultSessionIdManager - Session workerName=node0
-2022-10-05 12:15:59,652 [Start Help Server] INFO  o.e.j.server.handler.ContextHandler - Started o.e.j.s.ServletContextHandler@68395b51{/help,null,AVAILABLE}
-2022-10-05 12:15:59,673 [Start Help Server] INFO  o.e.jetty.server.AbstractConnector - Started ServerConnector@522fef94{HTTP/1.1, (http/1.1)}{127.0.0.1:51960}
-2022-10-05 12:15:59,691 [Start Help Server] INFO  org.eclipse.jetty.server.Server - Started Server@4b8f6caf{STARTING}[10.0.9,sto=0] @110472ms
-2022-10-05 12:17:11,940 [Stop Help Server] INFO  org.eclipse.jetty.server.Server - Stopped Server@4b8f6caf{STOPPING}[10.0.9,sto=0]
-2022-10-05 12:17:11,951 [Stop Help Server] INFO  o.e.jetty.server.AbstractConnector - Stopped ServerConnector@522fef94{HTTP/1.1, (http/1.1)}{127.0.0.1:0}
-2022-10-05 12:17:11,979 [Stop Help Server] INFO  o.e.j.server.handler.ContextHandler - Stopped o.e.j.s.ServletContextHandler@68395b51{/help,null,STOPPED}
