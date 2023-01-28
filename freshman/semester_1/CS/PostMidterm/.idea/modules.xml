@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/DP/DP.iml" filepath="$PROJECT_DIR$/DP/DP.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LabW13/LabW13.iml" filepath="$PROJECT_DIR$/LabW13/LabW13.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LabW9/LabW9.iml" filepath="$PROJECT_DIR$/LabW9/LabW9.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ML_LabW11_12/ML_LabW11_12.iml" filepath="$PROJECT_DIR$/ML_LabW11_12/ML_LabW11_12.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PostMidterm.iml" filepath="$PROJECT_DIR$/PostMidterm.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LabW13/Q_ArrList_Class/Q_ArrList_Class.iml" filepath="$PROJECT_DIR$/LabW13/Q_ArrList_Class/Q_ArrList_Class.iml" />
+    </modules>
+  </component>
+</project>
