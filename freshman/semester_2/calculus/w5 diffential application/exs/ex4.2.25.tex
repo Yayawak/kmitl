@@ -1,0 +1,65 @@
+\section*{4.2.25
+    \textbf{
+        Show that the equation $x^3 - 15x + c = 0$ has at most one solution in the interval $[-2,2]$
+    }
+}
+
+\textbf{Use Rolle's theorm and Contradiction proof}
+
+Let
+$
+    y = x^3 - 15x + c
+$
+\par
+By IVT, theres exists at least one real root in $x \in (-2,2)$ such that y(x) = 0
+
+\par
+Use method of contradiction.
+
+\par
+% Suppose
+\[
+    \forall a,b
+    % \biggl{[}
+    \biggl[
+        % f(a) = 0
+        y(x_1) = 0
+       \: \land \:
+        y(x_2) = 0
+        % f()
+       \: \land \:
+        a \neq b
+    \biggr]
+    % \right]
+\]
+
+\par
+Since y is diffentialble, by Rolle's theorem, thres exists a number $
+a \in (x_1, x_2)$ such that $y^{'}(a) = 0$
+However,
+
+\begin{align}
+\begin{split}
+    y^{'}(x) = 3x^2 - 15
+
+    \text{Solve inequation}
+
+    y^{'} &> 0 \\
+    3x^2 - 15 &> 0 \\
+    3(x^2 - 5) &> 0 \\
+    x^2 - 5 &> 0 \\
+    (x - \sqrt{5})(x + \sqrt{5}) &> 0 \\
+
+    \sqrt{5} \approx 2.2 \quad \text{then} \\
+    [-2,2] \in (-2.2, 2.2)
+
+    \text{so we get that $y^{'}$ is incresing on $[-2,2]$   then} \\
+    y^{'} \neq 0 \quad \text{in this closed interval}
+
+    \text{So all of these reason we conclude that}
+    % \begin{proof}
+    \textbf{y has only one solution on that interval \qedsymbol{} }
+    % \end{proof}
+
+\end{split}
+\end{align}

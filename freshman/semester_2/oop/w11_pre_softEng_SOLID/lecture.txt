@@ -1,0 +1,25 @@
+design pattern
+% singleton
+% component
+% builder
+
+clean code : UNCLE BOB should really read : SOLID
+
+% \section{leaked tank}
+egin{itemize}
+    \item S : Single responsibility
+        decouple || input class || logic class || singleplayer class || ai class || multiplayer class
+    \item O : Open for extension : metaverse(old) -> ai (now) \
+        Close : อะไรที่เพิ่มไปแล้วอย่าไปแก้มัน \
+    % \item Liskov substitution principle
+    %     คลาสแม่เปลี่นแล้วคลาสลูกไม่ควรเปลี่ยน : should not delete tostring method in ObjectClass java
+    % \item Interface Segregation
+    %     remote อะไรก็แล้วแต่ต้องมีปุ่ม on off => ปุ่มแดง => ไม่ว่าจะรุ่นไหนก็มีปุ่ม on / off => ดังนั้นควรเขียน interface ไว้กำกับ
+    %         interface เพิ่มลดเสี่ยง
+    %         interface ใช้ตอนถามว่า object ของเรา ต้องมีอะไร => ปุ่ม +1, -1 ต้องใส่ => อะไรที่ไม่จำเป็นไม่ต้องใส่เด็ดขาด YAGNI (You Aren't Going to Need it)
+    % \item Dependency inversion : อะไรก็ตามที่เป็น High-level modules ไม่ควรมายุ่งกับ Low-level ones, => User ต้องไม่มายุ่งเกี่ยวกับการจัดการฐานข้อมูล
+nd{itemize}
+
+
+	ext{รุ่นเรายังทันสอบ Exit exam ของ MVC}
+
