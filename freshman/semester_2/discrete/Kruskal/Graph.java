@@ -71,4 +71,12 @@ public class Graph<T> {
         }
         return counter;
     }
+
+    public Map<T, ArrayList<T>> getMap() {
+        return map;
+    }
+
+    public void setMap(Map<T, ArrayList<T>> map) {
+        this.map = map;
+    }
 }

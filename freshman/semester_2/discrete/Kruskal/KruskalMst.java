@@ -12,22 +12,19 @@ public class KruskalMst<T> {
         this.graph = g;
     }
 
-    // public List<Edge
     public List<WeighedGraph.Edge<T>> getMst() {
         List<WeighedGraph.Edge<T>> allEdges = graph.getAllEdges();
         Collections.sort(allEdges);
 
         Map<T, T> parent = new HashMap<>();
-        List<WeighedGraph.Edge<T>> mstEdges = new ArrayList<>();
-
-        for (T vertex : graph.getAllVertices()) {
+        for (T vertex : graph.getAllVertices())
             parent.put(vertex, vertex);
-        }
-
+        List<WeighedGraph.Edge<T>> mstEdges = new ArrayList<>();
         for (WeighedGraph.Edge<T> edge : allEdges) {
+            if (edge.weight == 0)
+                continue;
             T src = find(edge.src, parent);
             T dst = find(edge.dst, parent);
-
             if (!src.equals(dst)) {
                 mstEdges.add(edge);
                 parent.put(src, dst);
