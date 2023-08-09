@@ -20,6 +20,7 @@ int det(Mat *m)
         Mat minorM(n - 1, n - 1);
         for (int j = 1; j < n; j++)
         {
+            // NOTE : use column 0 as pivot column
             int colIdx = 0;
             for (int k = 0; k < n; k++)
             {

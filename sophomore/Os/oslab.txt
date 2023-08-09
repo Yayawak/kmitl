@@ -1,0 +1,37 @@
+Q1
+    1) My copy of i is 1
+       My copy of i is 2 
+    2) My copy of i is 2
+       My copy of i is 1
+    3) My copy of i is 1
+
+Q2) 2 types are ...
+
+    1) my copy of i is 1
+       my copy of i is 2
+    2) my copy of i is 2
+       my copy of i is 1
+    
+Q3.1  2 times
+Q3.2  1 times
+
+Q6 same
+
+Q7.1 3
+Q7.2 pidsub = fork();
+Q7.3 exit(0);
+Q7.4  for (int ่j = 0; j < num_gc; j++){
+	pidsub = fork();
+		if (pid != 0) {
+			printf("Child %d forked grandchild %d", j, i);
+		}
+	}
+	while(wait(NULL) != -1)
+Q7.5 int num_gc = 4;  
+Q7.6 pidsub == 0
+Q7.7 exit(0);
+Q7.8 exit(0);
+Q7.9 it's exit in if or else condition already
+Q7.10 23 lines 
+Q7.11 22 lines
+Q7.12 no
