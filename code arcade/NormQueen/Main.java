@@ -548,8 +548,15 @@ class BFS
 
     }
 
-    private static void printResult(Board board, PointData start, PointData terminal, PointData queenPos)
+    private static void printResult(Board board, PointData start, PointData terminal,
+        PointData queenPos, List<PointData> pathIfExist)
     {
+        if (pathIfExist != null)
+            // NOTE draw path
+            for (PointData cango : pathIfExist) {
+                board.pointDatas[cango.y][cango.x].marked = 
+                    UtilsClass.ANSI_BLUE + "*" + UtilsClass.ANSI_RESET;
+            }
         board.pointDatas[terminal.y][terminal.x].marked = "T";
         board.pointDatas[start.y][start.x].marked = "K";
         board.pointDatas[queenPos.y][queenPos.x].marked = "Q";
@@ -557,7 +564,8 @@ class BFS
     }
 
     // public List<PointData> findShortestPath(Board board, PointData start, PointData terminal)
-    public static int findShortestPath(Board board, List<PointData> obstacles,
+    // public static int findShortestPath(Board board, List<PointData> obstacles,
+    public static List<PointData> findShortestPath(Board board, List<PointData> obstacles,
         PointData start, PointData terminal,
         PointData queenPos // for visualization
         )
@@ -573,58 +581,97 @@ class BFS
         for (PointData point : obstacles)
             if (start.equals(point))
             {
-                printResult(board, start, terminal, queenPos);
-                return -1;
+                printResult(board, start, terminal, queenPos, null);
+                return null;
             }
 
         int rows = board.pointDatas.length;
         int cols = board.pointDatas[0].length;
 
         boolean[][] visited = new boolean[rows][cols];
-        Queue<PointData> q = new ArrayDeque<>();
+        Queue<List<PointData>> q = new ArrayDeque<>();
+        List<PointData> initialPath = new ArrayList<>();
+        initialPath.add(start);
 
-        q.offer(start);
+        q.offer(initialPath);
         // visited[start.x][start.y] = true;
         visited[start.y][start.x] = true;
+            
 
-        int steps = 0;
         while (!q.isEmpty())
         {
-            int size = q.size();
+            List<PointData> currentPath = q.poll();
+            PointData current = currentPath.get(currentPath.size() - 1);
 
-            for (int i = 0; i < size; i++)
+            if (current.equals(terminal))
             {
-                PointData cur = q.poll();
-                if (cur.equals(terminal))
-                {
-                    printResult(board, start, terminal, queenPos);
-                    return steps;
-                }
-
-                for (int[] dir : directions)
-                {
-                    int newX = cur.x + dir[0];
-                    int newY = cur.y + dir[1];
-
-                    // if (isValid(newX, newY, board.pointDatas)
-                    if (isValid(newX, newY, board.pointDatas)
-                        &&
-                        // !visited[newX][newY]
-                        !visited[newY][newX]
-                    )
-                    {
-                        q.offer(board.pointDatas[newX][newY]);
-                        // visited[newX][newY] = true;
-                        visited[newY][newX] = true;
-                    }
-
-                }
+                printResult(board, start, terminal, queenPos, currentPath);
+                return currentPath;
             }
-            steps++;
+
+            for (int[] dir : directions)
+            {
+                int newX = current.x + dir[0];
+                int newY = current.y + dir[1];
+
+                // if (isValid(newX, newY, board.pointDatas)
+                if (isValid(newX, newY, board.pointDatas)
+                    &&
+                    !visited[newY][newX]
+                )
+                {
+                    visited[newY][newX] = true;
+                    // visited[newX][newY] = true;
+                    // visited[newY][newX] = true;
+                    List<PointData> newPath = new ArrayList<>(currentPath);
+                    newPath.add(board.pointDatas[newX][newY]);
+                    // newPath.add(board.pointDatas[newY][newX]);
+                    q.offer(newPath);
+                }
+
+            }
         }
-        printResult(board, start, terminal, queenPos);
-        return -1;
-    }
+
+    printResult(board, start, terminal, queenPos, null);
+    return null;
+    //     int steps = 0;
+    //     while (!q.isEmpty())
+    //     {
+    //         int size = q.size();
+
+    //         for (int i = 0; i < size; i++)
+    //         {
+    //             PointData cur = q.poll();
+    //             if (cur.equals(terminal))
+    //             {
+    //                 printResult(board, start, terminal, queenPos);
+    //                 return steps;
+    //             }
+
+    //             for (int[] dir : directions)
+    //             {
+    //                 int newX = cur.x + dir[0];
+    //                 int newY = cur.y + dir[1];
+
+    //                 // if (isValid(newX, newY, board.pointDatas)
+    //                 if (isValid(newX, newY, board.pointDatas)
+    //                     &&
+    //                     // !visited[newX][newY]
+    //                     !visited[newY][newX]
+    //                 )
+    //                 {
+    //                     q.offer(board.pointDatas[newX][newY]);
+    //                     // visited[newX][newY] = true;
+    //                     visited[newY][newX] = true;
+    //                 }
+
+    //             }
+    //         }
+    //         steps++;
+    //     }
+    //     printResult(board, start, terminal, queenPos);
+    //     return -1;
+    // }
 }
 
 class ConnectedComponentClass
@@ -721,7 +768,7 @@ public class Main {
 
     // public static void testKingPosition(int a, int b)
     // public static void test(int a, int b, int boardSize)
-    public static int test(int boardSize)
+    public static boolean test(int boardSize)
     {
         // Board singleBoard = new Board(8);
         Board singleBoard = new Board(boardSize);
@@ -735,8 +782,8 @@ public class Main {
         // QueenPiece queen = new QueenPiece(new PointData(N / 2, N / 2),"norminate");
         a = UtilsClass.randbet(0, boardSize);
         b = UtilsClass.randbet(0, boardSize);
-        // QueenPiece queen = new QueenPiece(new PointData(a, b),"norminate");
-        QueenPiece queen = new QueenPiece(new PointData(1, 1),"norminate");
+        QueenPiece queen = new QueenPiece(new PointData(a, b),"norminate");
+        // QueenPiece queen = new QueenPiece(new PointData(1, 1),"norminate");
         // QueenPiece queen = new QueenPiece(new PointData(3, 5),"norminate");
 
         // singleBoard.OccupyPoint(singleBoard.norminatePiece, singleBoard.norminatePiece.pointData);
@@ -760,30 +807,37 @@ public class Main {
 
         a = UtilsClass.randbet(0, boardSize);
         b = UtilsClass.randbet(0, boardSize);
-        int foundPathSignal = BFS.findShortestPath(singleBoard,
+        // int foundPathSignal = BFS.findShortestPath(singleBoard,
+        List<PointData> pathIfFound = BFS.findShortestPath(singleBoard,
             queen.queenLegalMoves, 
             king.pointData,
             new PointData(a, b),
             queen.pointData
         );
-        System.out.println("Is Found Path ...\t" + 
-            UtilsClass.ANSI_CYAN + foundPathSignal + UtilsClass.ANSI_RESET);
+        // System.out.println("Is Found Path ...\t" + 
+        //     UtilsClass.ANSI_CYAN + foundPathSignal + UtilsClass.ANSI_RESET);
+        System.out.println((pathIfFound != null) ? "Found Path" : "Not Found Path");
 
         UtilsClass.closeScanner();
-        return foundPathSignal;
+        return pathIfFound != null;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) 
+    {
         // for (int i = 0; i < 100; i++) 
         while (true)
         {
-            int max = 15;
-            // int max = 30;
-            int resultCango = test(max);
+            // int max = 15;
+            int max = 30;
+            // int resultCango = test(max);
+            boolean isFoundPath = test(max);
             try {
                 // Thread.sleep(2000);
                 // Thread.sleep(1000);
-                Thread.sleep((resultCango > 0) ? 5000 : 1000 / 2);
+                Thread.sleep((isFoundPath) ? 2000 : 1000 / 2);
+                // Thread.sleep(500);
+                System.out.print("\033[H\033[2J");
+
             } catch (Exception e) { }
 
             System.out.println("-------------".repeat(5));
@@ -792,6 +846,8 @@ public class Main {
 
 
         // UtilsClass.genCombinations(new int[]{-1, 0, 1}, 2);
+
+    }
 
     }
 }

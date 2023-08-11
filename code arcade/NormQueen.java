@@ -1,5 +1,9 @@
-package NormQueen;
 
+
+public class NormQueen
+{
+
+}
 // import java.util.ArrayList;
 // import java.util.List;
 // import java.util.Scanner;
