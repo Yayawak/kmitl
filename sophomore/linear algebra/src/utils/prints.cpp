@@ -4,11 +4,12 @@
 
 void printmat(Mat *m)
 {
-    printf("row = %d\n", m->row);
-    printf("col = %d\n", m->col);
+    // printf("row = %d\n", m->row);
+    // printf("col = %d\n", m->col);
+    printf("dimension = [%d,%d]\n", m->row, m->col);
     for (int i = 0; i < m->row; i++)
         for (int j = 0; j < m->col; j++)
-            printf("mat[%d][%d] = %d\n", i, j, m->data[i][j]);
+            printf("mat[%d][%d] = %f\n", i, j, m->data[i][j]);
 }
 
 // comfort with 1 tab (8 dashes)
@@ -28,8 +29,9 @@ static string get8dash(int n)
 }
 void prettyprint(Mat *m)
 {
-    printf("row = %d\n", m->row);
-    printf("col = %d\n", m->col);
+    // printf("row = %d\n", m->row);
+    // printf("col = %d\n", m->col);
+    printf("dimension = [%d,%d]\n", m->row, m->col);
 
     // cout << endl << "_________________________" << endl;
     cout << get8dash(m->row)<< endl;
@@ -38,7 +40,12 @@ void prettyprint(Mat *m)
         cout << "| ";
         for (int j = 0; j < m->col; j++)
         {
-            cout << m->data[i][j] << "\t|";
+            // float show = std::round(
+            //     (*m)(i, j) * std::pow(10, 3) / std::pow(10, 3));
+            // cout << m->data[i][j] << "\t|";
+            // cout << show << "\t|";
+            // printf("%.3f\t|", (*m)(i, j));
+            printf("%.2f\t|", (*m)(i, j));
         }
         // cout << endl << "_________________________" << endl;
         cout << endl << get8dash(m->row) << endl;

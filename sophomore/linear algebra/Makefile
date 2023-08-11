@@ -1,15 +1,21 @@
 GPP=g++
 GCC=gcc
 # ProgName=determinantCalculator
-ProgName=app
+invProgName=inverseMatrixFinder
+# ProgName=app
+SrcFiles=src/*/*.cpp src/*.cpp
+buildDir=bin
 
 test:
-	${GPP} -g */*.cpp main.cpp && ./a.out
+# main:
+	${GPP} -g ${SrcFiles} main.cpp -o && ./a.out
 # ${GPP} -g utils/* main.cpp  && ./a.out
 # ${GPP} -g utils/Mat.cpp utils/prints.cpp main.cpp  && ./a.out
+makeinverse:
+	${GPP} -g ${SrcFiles} main.cpp -o bin/${invProgName} && ./bin/${invProgName}
 
 makedet:
-	${GPP} -g */*.cpp main.cpp -o ${ProgName} && ./${ProgName}.out
+	${GPP} -g ${SrcFiles} main.cpp -o bin/${determinantCalculator} && ./bin/${determinantCalculator}
 
 gui:
 # ${GCC} -o main.cpp $(pkg-config --cflags --libs gtk+-3.0) main.cpp

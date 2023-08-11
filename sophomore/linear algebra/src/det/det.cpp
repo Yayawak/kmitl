@@ -1,9 +1,9 @@
 #include "../include/linalg.h"
 
-int det(Mat *m)
+float det(Mat *m)
 {
     int n;
-    int determinant;
+    float determinant;
 
     if (!isSquare(m))
     {
@@ -14,13 +14,12 @@ int det(Mat *m)
     if (n == 2)
         return (((*m)(0, 0) * (*m)(1, 1)) - ((*m)(0, 1) * (*m)(1, 0)));
 
-    determinant = 0;
+    determinant = 0.f;
     for (int i = 0; i < n; i++)
     {
         Mat minorM(n - 1, n - 1);
         for (int j = 1; j < n; j++)
         {
-            // NOTE : use column 0 as pivot column
             int colIdx = 0;
             for (int k = 0; k < n; k++)
             {
@@ -28,6 +27,7 @@ int det(Mat *m)
                     minorM[j - 1][colIdx++] = (*m)(j, k);
             }
         }
+        // NOTE : use row 0 as pivot column
         determinant += pow(-1, i) * (*m)(0, i) * det(&minorM);
     }
     return (determinant);
