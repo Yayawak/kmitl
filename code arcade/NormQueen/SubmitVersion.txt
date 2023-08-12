@@ -1,12 +1,88 @@
 package NormQueen;
 
+// class SubmitVersion {
+    
+// }
+
+
+// package NormQueen;
+
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Queue;
 import java.util.Scanner;
-import java.util.Vector;
 import java.lang.Math;
+
+public class Main 
+{
+    public static void main(String[] args) {
+        int boardSize = UtilsClass.getNumInput(2, 1000);
+        Board singleBoard = new Board(boardSize);
+
+        // ! king
+        int[] pos = UtilsClass.getIntDuo();
+        Piece king = new Piece(new PointData(pos[0], pos[1]), "kingNomsy");
+
+        // ! quuen
+        pos = UtilsClass.getIntDuo();
+        QueenPiece queen = new QueenPiece(new PointData(pos[0], pos[1]),"norminate");
+        singleBoard.OccupyPoint(king, king.pointData);
+        singleBoard.OccupyPoint(queen, queen.pointData);
+        queen.calcualteQueen(singleBoard);
+        // queen.showListOfLegalMoves();
+
+        // ! out
+        pos = UtilsClass.getIntDuo();
+        int foundPathSignal = BFS.findShortestPath(singleBoard,
+            queen.queenLegalMoves, 
+            king.pointData,
+            new PointData(pos[0], pos[1]),
+            queen.pointData
+        );
+        // System.out.println("Is Found Path ...\t" + 
+        //     // UtilsClass.ANSI_CYAN + foundPathSignal + UtilsClass.ANSI_RESET);
+        //     UtilsClass.ANSI_CYAN + foundPathSignal + UtilsClass.ANSI_RESET);
+        System.out.println((foundPathSignal == -1) ? "NO" : "YES");
+
+        UtilsClass.closeScanner();
+    }
+}
+
+
+class PointData
+{
+    int x;
+    int y;
+    public Piece whoIsOccupied;
+    public String marked = " ";
+    public int label = -1;
+
+    public PointData(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public boolean equals(PointData other)
+    {
+        return this.x == other.x && this.y == other.y;
+    }
+
+    @Override
+    public String toString()
+    {
+        // return (whoIsOccupied == null) ? " " : "x";
+        return (whoIsOccupied != null) ? (whoIsOccupied.pieceName == "norminate")
+            ? "Q" : "K"
+            : "v";
+    }
+
+    public String posStr()
+    {
+        return String.format("[%d,%d]", x, y);
+    }
+
+}
 
 class UtilsClass
 {
@@ -49,7 +125,7 @@ class UtilsClass
         return ret;
     }
 
-    // public static int getNumInput()
+    // // public static int getNumInput()
     public static int getNumInput(int start, int exclusiveEnd)
     {
         try {
@@ -158,39 +234,6 @@ class UtilsClass
 }
 
 
-class PointData
-{
-    int x;
-    int y;
-    public Piece whoIsOccupied;
-    public String marked = " ";
-    public int label = -1;
-
-    public PointData(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
-
-    public boolean equals(PointData other)
-    {
-        return this.x == other.x && this.y == other.y;
-    }
-
-    @Override
-    public String toString()
-    {
-        // return (whoIsOccupied == null) ? " " : "x";
-        return (whoIsOccupied != null) ? (whoIsOccupied.pieceName == "norminate")
-            ? "Q" : "K"
-            : "v";
-    }
-
-    public String posStr()
-    {
-        return String.format("[%d,%d]", x, y);
-    }
-
-}
 
 class PointDataForAStart extends PointData
 {
@@ -218,6 +261,14 @@ class Piece
     }
 }
 
+// class A extends Piece
+// {
+
+//     public A(PointData pointData, String pieceName) {
+//         super(pointData, pieceName);
+//         //TODO Auto-generated constructor stub
+//     }
+// }
 class QueenPiece extends Piece 
 {
     // public PointData[] queenLegalMoves;
@@ -245,7 +296,7 @@ class QueenPiece extends Piece
 
     }
 
-    // public PointData[] allLegalMovesPositionData(Board boardQueenOn)
+    // // public PointData[] allLegalMovesPositionData(Board boardQueenOn)
     public List<PointData> allLegalMovesPositionData(Board boardQueenOn)
     {
         final int queenX = pointData.x;
@@ -309,15 +360,15 @@ class QueenPiece extends Piece
         return (legalMoves);
     }
 
-    public void showListOfLegalMoves()
-    {
-        // System.out.println("Lenght of list = " + queenLegalMoves.length);
-        System.out.println("Size of list = " + queenLegalMoves.size());
-        for ( var pointData : queenLegalMoves) {
-            System.out.print(pointData.posStr() + "\t"); 
-        }
-        System.out.println();
-    }
+    // public void showListOfLegalMoves()
+    // {
+    //     // System.out.println("Lenght of list = " + queenLegalMoves.length);
+    //     System.out.println("Size of list = " + queenLegalMoves.size());
+    //     for ( var pointData : queenLegalMoves) {
+    //         System.out.print(pointData.posStr() + "\t"); 
+    //     }
+    //     System.out.println();
+    // }
     
     private boolean isQueenCanMoveOnThisPoint(PointData p)
     {
@@ -328,34 +379,34 @@ class QueenPiece extends Piece
         return false;
     }
 
-    public void printLegalMoves(Board boardQueenOn)
-    {
-        StringBuilder sb = new StringBuilder("");
-        for (int i = 0; i < boardQueenOn.pointDatas.length; i++)
-        {
-            int j;
-            sb.append("|");
-            for ( j = 0; j < boardQueenOn.pointDatas[i].length; j++)
-            {
-                if (isQueenCanMoveOnThisPoint(new PointData(j, i)))
-                {
-                    if (this.pointData.equals(new PointData(j, i)))
-                    {
-                        sb.append("Q|");
-                        // sb.append(Color.RED + "Q" + Color.RESET + "|");
-                    }
-                    else
-                        sb.append("x" + "|");
-                }
-                else   
-                {
-                    sb.append(" " + "|");
-                }
-            }
-            sb.append("\n");
-        }
-        System.out.println(sb.toString());
-    }
+    // public void printLegalMoves(Board boardQueenOn)
+    // {
+    //     StringBuilder sb = new StringBuilder("");
+    //     for (int i = 0; i < boardQueenOn.pointDatas.length; i++)
+    //     {
+    //         int j;
+    //         sb.append("|");
+    //         for ( j = 0; j < boardQueenOn.pointDatas[i].length; j++)
+    //         {
+    //             if (isQueenCanMoveOnThisPoint(new PointData(j, i)))
+    //             {
+    //                 if (this.pointData.equals(new PointData(j, i)))
+    //                 {
+    //                     sb.append("Q|");
+    //                     // sb.append(Color.RED + "Q" + Color.RESET + "|");
+    //                 }
+    //                 else
+    //                     sb.append("x" + "|");
+    //             }
+    //             else   
+    //             {
+    //                 sb.append(" " + "|");
+    //             }
+    //         }
+    //         sb.append("\n");
+    //     }
+    //     System.out.println(sb.toString());
+    // }
 }
 
 
@@ -409,6 +460,8 @@ class Board
         System.out.println(sb.toString());
     }
 }
+
+
 class BFS
 {
     public static int[][] directions = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
@@ -435,7 +488,7 @@ class BFS
         PointData queenPos // for visualization
         )
     {
-
+i
         // ? King pos = start position
         for (PointData obstacle : obstacles)        
         {
@@ -500,46 +553,3 @@ class BFS
     }
 }
 
-
-public class Main {
-    public static void main(String[] args) {
-        int boardSize = UtilsClass.getNumInput(2, 1000);
-        Board singleBoard = new Board(boardSize);
-
-        // ! king
-        int[] pos = UtilsClass.getIntDuo();
-        Piece king = new Piece(new PointData(pos[0], pos[1]), "kingNomsy");
-
-        // ! quuen
-        pos = UtilsClass.getIntDuo();
-        QueenPiece queen = new QueenPiece(new PointData(pos[0], pos[1]),"norminate");
-        singleBoard.OccupyPoint(king, king.pointData);
-        singleBoard.OccupyPoint(queen, queen.pointData);
-        queen.calcualteQueen(singleBoard);
-        // queen.showListOfLegalMoves();
-
-        // ! out
-        pos = UtilsClass.getIntDuo();
-        int foundPathSignal = BFS.findShortestPath(singleBoard,
-            queen.queenLegalMoves, 
-            king.pointData,
-            new PointData(pos[0], pos[1]),
-            queen.pointData
-        );
-        // System.out.println("Is Found Path ...\t" + 
-        //     // UtilsClass.ANSI_CYAN + foundPathSignal + UtilsClass.ANSI_RESET);
-        //     UtilsClass.ANSI_CYAN + foundPathSignal + UtilsClass.ANSI_RESET);
-        System.out.println((foundPathSignal == -1) ? "NO" : "YES");
-
-        UtilsClass.closeScanner();
-    }
-}
-
-class A extends Piece
-{
-
-    public A(PointData pointData, String pieceName) {
-        super(pointData, pieceName);
-        //TODO Auto-generated constructor stub
-    }
-}
