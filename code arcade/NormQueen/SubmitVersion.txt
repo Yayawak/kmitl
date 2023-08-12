@@ -1,12 +1,88 @@
 package NormQueen;
 
+// class SubmitVersion {
+    
+// }
+
+
+// package NormQueen;
+
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Queue;
 import java.util.Scanner;
-import java.util.Vector;
 import java.lang.Math;
+
+public class Main 
+{
+    public static void main(String[] args) {
+        int boardSize = UtilsClass.getNumInput(2, 1000);
+        Board singleBoard = new Board(boardSize);
+
+        // ! king
+        int[] pos = UtilsClass.getIntDuo();
+        Piece king = new Piece(new PointData(pos[0], pos[1]), "kingNomsy");
+
+        // ! quuen
+        pos = UtilsClass.getIntDuo();
+        QueenPiece queen = new QueenPiece(new PointData(pos[0], pos[1]),"norminate");
+        singleBoard.OccupyPoint(king, king.pointData);
+        singleBoard.OccupyPoint(queen, queen.pointData);
+        queen.calcualteQueen(singleBoard);
+        // queen.showListOfLegalMoves();
+
+        // ! out
+        pos = UtilsClass.getIntDuo();
+        int foundPathSignal = BFS.findShortestPath(singleBoard,
+            queen.queenLegalMoves, 
+            king.pointData,
+            new PointData(pos[0], pos[1]),
+            queen.pointData
+        );
+        // System.out.println("Is Found Path ...\t" + 
+        //     // UtilsClass.ANSI_CYAN + foundPathSignal + UtilsClass.ANSI_RESET);
+        //     UtilsClass.ANSI_CYAN + foundPathSignal + UtilsClass.ANSI_RESET);
+        System.out.println((foundPathSignal == -1) ? "NO" : "YES");
+
+        UtilsClass.closeScanner();
+    }
+}
+
+
+class PointData
+{
+    int x;
+    int y;
+    public Piece whoIsOccupied;
+    public String marked = " ";
+    public int label = -1;
+
+    public PointData(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public boolean equals(PointData other)
+    {
+        return this.x == other.x && this.y == other.y;
+    }
+
+    @Override
+    public String toString()
+    {
+        // return (whoIsOccupied == null) ? " " : "x";
+        return (whoIsOccupied != null) ? (whoIsOccupied.pieceName == "norminate")
+            ? "Q" : "K"
+            : "v";
+    }
+
+    public String posStr()
+    {
+        return String.format("[%d,%d]", x, y);
+    }
+
+}
 
 class UtilsClass
 {
@@ -49,7 +125,7 @@ class UtilsClass
         return ret;
     }
 
-    // public static int getNumInput()
+    // // public static int getNumInput()
     public static int getNumInput(int start, int exclusiveEnd)
     {
         try {
@@ -158,39 +234,6 @@ class UtilsClass
 }
 
 
-class PointData
-{
-    int x;
-    int y;
-    public Piece whoIsOccupied;
-    public String marked = " ";
-    public int label = -1;
-
-    public PointData(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
-
-    public boolean equals(PointData other)
-    {
-        return this.x == other.x && this.y == other.y;
-    }
-
-    @Override
-    public String toString()
-    {
-        // return (whoIsOccupied == null) ? " " : "x";
-        return (whoIsOccupied != null) ? (whoIsOccupied.pieceName == "norminate")
-            ? "Q" : "K"
-            : "v";
-    }
-
-    public String posStr()
-    {
-        return String.format("[%d,%d]", x, y);
-    }
-
-}
 
 class PointDataForAStart extends PointData
 {
@@ -218,6 +261,14 @@ class Piece
     }
 }
 
+// class A extends Piece
+// {
+
+//     public A(PointData pointData, String pieceName) {
+//         super(pointData, pieceName);
+//         //TODO Auto-generated constructor stub
+//     }
+// }
 class QueenPiece extends Piece 
 {
     // public PointData[] queenLegalMoves;
@@ -245,7 +296,7 @@ class QueenPiece extends Piece
 
     }
 
-    // public PointData[] allLegalMovesPositionData(Board boardQueenOn)
+    // // public PointData[] allLegalMovesPositionData(Board boardQueenOn)
     public List<PointData> allLegalMovesPositionData(Board boardQueenOn)
     {
         final int queenX = pointData.x;
@@ -309,15 +360,15 @@ class QueenPiece extends Piece
         return (legalMoves);
     }
 
-    public void showListOfLegalMoves()
-    {
-        // System.out.println("Lenght of list = " + queenLegalMoves.length);
-        System.out.println("Size of list = " + queenLegalMoves.size());
-        for ( var pointData : queenLegalMoves) {
-            System.out.print(pointData.posStr() + "\t"); 
-        }
-        System.out.println();
-    }
+    // public void showListOfLegalMoves()
+    // {
+    //     // System.out.println("Lenght of list = " + queenLegalMoves.length);
+    //     System.out.println("Size of list = " + queenLegalMoves.size());
+    //     for ( var pointData : queenLegalMoves) {
+    //         System.out.print(pointData.posStr() + "\t"); 
+    //     }
+    //     System.out.println();
+    // }
     
     private boolean isQueenCanMoveOnThisPoint(PointData p)
     {
@@ -328,34 +379,34 @@ class QueenPiece extends Piece
         return false;
     }
 
-    public void printLegalMoves(Board boardQueenOn)
-    {
-        StringBuilder sb = new StringBuilder("");
-        for (int i = 0; i < boardQueenOn.pointDatas.length; i++)
-        {
-            int j;
-            sb.append("|");
-            for ( j = 0; j < boardQueenOn.pointDatas[i].length; j++)
-            {
-                if (isQueenCanMoveOnThisPoint(new PointData(j, i)))
-                {
-                    if (this.pointData.equals(new PointData(j, i)))
-                    {
-                        sb.append("Q|");
-                        // sb.append(Color.RED + "Q" + Color.RESET + "|");
-                    }
-                    else
-                        sb.append("x" + "|");
-                }
-                else   
-                {
-                    sb.append(" " + "|");
-                }
-            }
-            sb.append("\n");
-        }
-        System.out.println(sb.toString());
-    }
+    // public void printLegalMoves(Board boardQueenOn)
+    // {
+    //     StringBuilder sb = new StringBuilder("");
+    //     for (int i = 0; i < boardQueenOn.pointDatas.length; i++)
+    //     {
+    //         int j;
+    //         sb.append("|");
+    //         for ( j = 0; j < boardQueenOn.pointDatas[i].length; j++)
+    //         {
+    //             if (isQueenCanMoveOnThisPoint(new PointData(j, i)))
+    //             {
+    //                 if (this.pointData.equals(new PointData(j, i)))
+    //                 {
+    //                     sb.append("Q|");
+    //                     // sb.append(Color.RED + "Q" + Color.RESET + "|");
+    //                 }
+    //                 else
+    //                     sb.append("x" + "|");
+    //             }
+    //             else   
+    //             {
+    //                 sb.append(" " + "|");
+    //             }
+    //         }
+    //         sb.append("\n");
+    //     }
+    //     System.out.println(sb.toString());
+    // }
 }
 
 
@@ -409,6 +460,8 @@ class Board
         System.out.println(sb.toString());
     }
 }
+
+
 class BFS
 {
     public static int[][] directions = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
@@ -421,15 +474,8 @@ class BFS
 
     }
 
-    private static void printResult(Board board, PointData start, PointData terminal,
-        PointData queenPos, List<PointData> pathIfExist)
+    private static void printResult(Board board, PointData start, PointData terminal, PointData queenPos)
     {
-        if (pathIfExist != null)
-            // NOTE draw path
-            for (PointData cango : pathIfExist) {
-                board.pointDatas[cango.y][cango.x].marked = 
-                    UtilsClass.ANSI_BLUE + "*" + UtilsClass.ANSI_RESET;
-            }
         board.pointDatas[terminal.y][terminal.x].marked = "T";
         board.pointDatas[start.y][start.x].marked = "K";
         board.pointDatas[queenPos.y][queenPos.x].marked = "Q";
@@ -437,13 +483,12 @@ class BFS
     }
 
     // public List<PointData> findShortestPath(Board board, PointData start, PointData terminal)
-    // public static int findShortestPath(Board board, List<PointData> obstacles,
-    public static List<PointData> findShortestPath(Board board, List<PointData> obstacles,
+    public static int findShortestPath(Board board, List<PointData> obstacles,
         PointData start, PointData terminal,
         PointData queenPos // for visualization
         )
     {
-
+i
         // ? King pos = start position
         for (PointData obstacle : obstacles)        
         {
@@ -454,182 +499,57 @@ class BFS
         for (PointData point : obstacles)
             if (start.equals(point))
             {
-                printResult(board, start, terminal, queenPos, null);
-                return null;
+                // printResult(board, start, terminal, queenPos);
+                return -1;
             }
 
         int rows = board.pointDatas.length;
         int cols = board.pointDatas[0].length;
 
         boolean[][] visited = new boolean[rows][cols];
-        Queue<List<PointData>> q = new ArrayDeque<>();
-        List<PointData> initialPath = new ArrayList<>();
-        initialPath.add(start);
+        Queue<PointData> q = new ArrayDeque<>();
 
-        q.offer(initialPath);
+        q.offer(start);
         // visited[start.x][start.y] = true;
         visited[start.y][start.x] = true;
-            
 
+        int steps = 0;
         while (!q.isEmpty())
         {
-            List<PointData> currentPath = q.poll();
-            PointData current = currentPath.get(currentPath.size() - 1);
+            int size = q.size();
 
-            if (current.equals(terminal))
+            for (int i = 0; i < size; i++)
             {
-                printResult(board, start, terminal, queenPos, currentPath);
-                return currentPath;
-            }
-
-            for (int[] dir : directions)
-            {
-                int newX = current.x + dir[0];
-                int newY = current.y + dir[1];
-
-                // if (isValid(newX, newY, board.pointDatas)
-                if (isValid(newX, newY, board.pointDatas)
-                    &&
-                    !visited[newY][newX]
-                )
+                PointData cur = q.poll();
+                if (cur.equals(terminal))
                 {
-                    visited[newY][newX] = true;
-                    // visited[newX][newY] = true;
-                    // visited[newY][newX] = true;
-                    List<PointData> newPath = new ArrayList<>(currentPath);
-                    newPath.add(board.pointDatas[newX][newY]);
-                    // newPath.add(board.pointDatas[newY][newX]);
-                    q.offer(newPath);
+                    // printResult(board, start, terminal, queenPos);
+                    return steps;
                 }
 
+                for (int[] dir : directions)
+                {
+                    int newX = cur.x + dir[0];
+                    int newY = cur.y + dir[1];
+
+                    // if (isValid(newX, newY, board.pointDatas)
+                    if (isValid(newX, newY, board.pointDatas)
+                        &&
+                        // !visited[newX][newY]
+                        !visited[newY][newX]
+                    )
+                    {
+                        q.offer(board.pointDatas[newX][newY]);
+                        // visited[newX][newY] = true;
+                        visited[newY][newX] = true;
+                    }
+
+                }
             }
+            steps++;
         }
-
-    printResult(board, start, terminal, queenPos, null);
-    return null;
-    //     int steps = 0;
-    //     while (!q.isEmpty())
-    //     {
-    //         int size = q.size();
-
-    //         for (int i = 0; i < size; i++)
-    //         {
-    //             PointData cur = q.poll();
-    //             if (cur.equals(terminal))
-    //             {
-    //                 printResult(board, start, terminal, queenPos);
-    //                 return steps;
-    //             }
-
-    //             for (int[] dir : directions)
-    //             {
-    //                 int newX = cur.x + dir[0];
-    //                 int newY = cur.y + dir[1];
-
-    //                 // if (isValid(newX, newY, board.pointDatas)
-    //                 if (isValid(newX, newY, board.pointDatas)
-    //                     &&
-    //                     // !visited[newX][newY]
-    //                     !visited[newY][newX]
-    //                 )
-    //                 {
-    //                     q.offer(board.pointDatas[newX][newY]);
-    //                     // visited[newX][newY] = true;
-    //                     visited[newY][newX] = true;
-    //                 }
-
-    //             }
-    //         }
-    //         steps++;
-    //     }
-    //     printResult(board, start, terminal, queenPos);
-    //     return -1;
-    // }
-}
-
-
-public class Main {
-
-    // public static void testKingPosition(int a, int b)
-    // public static void test(int a, int b, int boardSize)
-    public static boolean test(int boardSize)
-    {
-        // Board singleBoard = new Board(8);
-        Board singleBoard = new Board(boardSize);
-        // Board singleBoard = new Board(25);
-
-        int N = singleBoard.N;
-        int a = UtilsClass.randbet(0, boardSize);
-        int b = UtilsClass.randbet(0, boardSize);
-        // Piece king = new Piece(new PointData(3, 2), "kingNomsy");
-        Piece king = new Piece(new PointData(a, b), "kingNomsy");
-        // QueenPiece queen = new QueenPiece(new PointData(N / 2, N / 2),"norminate");
-        a = UtilsClass.randbet(0, boardSize);
-        b = UtilsClass.randbet(0, boardSize);
-        QueenPiece queen = new QueenPiece(new PointData(a, b),"norminate");
-        // QueenPiece queen = new QueenPiece(new PointData(1, 1),"norminate");
-        // QueenPiece queen = new QueenPiece(new PointData(3, 5),"norminate");
-
-        // singleBoard.OccupyPoint(singleBoard.norminatePiece, singleBoard.norminatePiece.pointData);
-        // singleBoard.OccupyPoint(singleBoard.nomsyPiece, singleBoard.nomsyPiece.pointData);
-        singleBoard.OccupyPoint(king, king.pointData);
-        singleBoard.OccupyPoint(queen, queen.pointData);
-        queen.calcualteQueen(singleBoard);
-        // queen.printLegalMoves(singleBoard);
-        // queen.calcualteQueen(singleBoard);
-        queen.showListOfLegalMoves();
-
-        // ConnectedComponentClass.getConnectedComponent(singleBoard, queen.queenLegalMoves);
-        // PathFinder.getNeighbors(null, null)
-        // PathFinder.pathToPoint(singleBoard, queen.queenLegalMoves,
-        //     // queen.pointData, new PointData(2, 2));
-        //     queen.pointData, new PointData(0, 0));
-
-        a = UtilsClass.randbet(0, boardSize);
-        b = UtilsClass.randbet(0, boardSize);
-        // int foundPathSignal = BFS.findShortestPath(singleBoard,
-        List<PointData> pathIfFound = BFS.findShortestPath(singleBoard,
-            queen.queenLegalMoves, 
-            king.pointData,
-            new PointData(a, b),
-            queen.pointData
-        );
-        // System.out.println("Is Found Path ...\t" + 
-        //     UtilsClass.ANSI_CYAN + foundPathSignal + UtilsClass.ANSI_RESET);
-        System.out.println((pathIfFound != null) ? "Found Path" : "Not Found Path");
-
-        UtilsClass.closeScanner();
-        return pathIfFound != null;
+        // printResult(board, start, terminal, queenPos);
+        return -1;
     }
-
-
-    public static void main(String[] args) 
-    {
-        // for (int i = 0; i < 100; i++) 
-        while (true)
-        {
-            // int max = 15;
-            int max = 30;
-            // int resultCango = test(max);
-            boolean isFoundPath = test(max);
-            try {
-                // Thread.sleep(2000);
-                // Thread.sleep(1000);
-                Thread.sleep((isFoundPath) ? 2000 : 1000 / 2);
-                // Thread.sleep(500);
-                System.out.print("\033[H\033[2J");
-
-            } catch (Exception e) { }
-
-            System.out.println("-------------".repeat(5));
-        }
-        // fork();
-
-
-        // UtilsClass.genCombinations(new int[]{-1, 0, 1}, 2);
-
-    }
-
 }
 
-}
