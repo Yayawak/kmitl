@@ -1,3 +1,4 @@
+package NormQueen;
 
 
 public class NormQueen
