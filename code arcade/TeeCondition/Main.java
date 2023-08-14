@@ -1,6 +1,8 @@
 // package TeeCondition;
 import java.util.Scanner;
 
+import BreathTechiquePermuation.Main;
+
 public class Main {
 
     static Scanner sc = new Scanner(System.in);

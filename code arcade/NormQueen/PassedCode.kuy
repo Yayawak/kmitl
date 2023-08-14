@@ -1,0 +1,94 @@
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Scanner;
+import java.util.Set;
+
+class Point {
+    int x, y;
+    
+    Point(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+    
+    @Override
+    public int hashCode() {
+        return x * 1000 + y;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null || getClass() != obj.getClass())
+            return false;
+        Point other = (Point) obj;
+        return x == other.x && y == other.y;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        int n = sc.nextInt();
+        int ax = sc.nextInt();
+        int ay = sc.nextInt();
+        int bx = sc.nextInt();
+        int by = sc.nextInt();
+        int cx = sc.nextInt();
+        int cy = sc.nextInt();
+        
+        boolean[][] obstacles = new boolean[n + 1][n + 1];
+        obstacles[bx][by] = true;
+        
+        int[] dx = {-1, -1, -1, 0, 0, 1, 1, 1};
+        int[] dy = {-1, 0, 1, -1, 1, -1, 0, 1};
+        
+        for (int i = 0; i < 8; i++) {
+            int x = bx;
+            int y = by;
+            while (true) {
+                x += dx[i];
+                y += dy[i];
+                if (x < 1 || x > n || y < 1 || y > n) {
+                    break;
+                }
+                obstacles[x][y] = true;
+            }
+        }
+        
+        boolean[][] visited = new boolean[n + 1][n + 1];
+        Queue<Point> queue = new LinkedList<>();
+        
+        queue.offer(new Point(ax, ay));
+        visited[ax][ay] = true;
+        
+        while (!queue.isEmpty()) {
+            Point current = queue.poll();
+            int x = current.x;
+            int y = current.y;
+            
+            if (x == cx && y == cy) {
+                System.out.println("Yes");
+                sc.close();
+                return;
+            }
+            
+            for (int i = -1; i <= 1; i++) {
+                for (int j = -1; j <= 1; j++) {
+                    int nx = x + i;
+                    int ny = y + j;
+                    if (nx >= 1 && nx <= n && ny >= 1 && ny <= n && !obstacles[nx][ny] && !visited[nx][ny]) {
+                        visited[nx][ny] = true;
+                        queue.offer(new Point(nx, ny));
+                    }
+                }
+            }
+        }
+        
+        System.out.println("No");
+        sc.close();
+    }
+}

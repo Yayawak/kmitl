@@ -1,4 +1,4 @@
-package NormQueen;
+// package NormQueen;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -816,7 +816,11 @@ public class Main {
         );
         // System.out.println("Is Found Path ...\t" + 
         //     UtilsClass.ANSI_CYAN + foundPathSignal + UtilsClass.ANSI_RESET);
-        System.out.println((pathIfFound != null) ? "Found Path" : "Not Found Path");
+        System.out.println(
+            ((pathIfFound != null) ? 
+                UtilsClass.ANSI_CYAN +"Found Path"  + UtilsClass.ANSI_RESET
+                : "Not Found Path")
+            );
 
         UtilsClass.closeScanner();
         return pathIfFound != null;
@@ -828,7 +832,7 @@ public class Main {
         while (true)
         {
             // int max = 15;
-            int max = 30;
+            int max = 20;
             // int resultCango = test(max);
             boolean isFoundPath = test(max);
             try {
