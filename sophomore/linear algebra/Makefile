@@ -6,9 +6,13 @@ invProgName=inverseMatrixFinder
 SrcFiles=src/*/*.cpp src/*.cpp
 buildDir=bin
 
-test:
-# main:
-	${GPP} -g ${SrcFiles} main.cpp -o && ./a.out
+all: test
+# all: 
+# ${GPP} -g ${SrcFiles} main.cpp -o && ./a.out
+# ${GPP} -g ${SrcFiles} main.cpp -o bin/testFile && ./a.out
+
+ttest:
+	${GPP} -g ${SrcFiles} main.cpp -o bin/testFile && ./bin/testFile
 # ${GPP} -g utils/* main.cpp  && ./a.out
 # ${GPP} -g utils/Mat.cpp utils/prints.cpp main.cpp  && ./a.out
 makeinverse:

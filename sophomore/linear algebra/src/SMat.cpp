@@ -4,15 +4,15 @@
 #include <math.h>
 
 
-SMat::SMat(int c, int r) : col(c), row(r), data(r, Row(c))
+SMat::SMat(int r, int c) : col(c), row(r), data(r, Row(c))
+{
+    for (int i = 0; i < r; i++)
     {
-        for (int i = 0; i < r; i++)
-        {
-            data[i] = Row(c);
-            // data.push_back(Row(c));
-        }
-
+        // each row have c columns
+        data[i] = Row(c);
+        // data.push_back(Row(c));
     }
+}
 
 SMat::Row& SMat::operator[](int i)
 {

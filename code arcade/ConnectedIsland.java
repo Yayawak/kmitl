@@ -24,7 +24,7 @@ class Utils
         while (nrow >= 0)
         {
             String s = sc.nextLine();
-            System.out.println("s" + s);
+            // System.out.println("s" + s);
             sb.append(s);
             nrow--;
         }
@@ -158,8 +158,8 @@ class SequencialConnectedComponent
         {
             equivalenceTable.add(set);
         }
-        System.out.println("Adding Eqivalence set to EqivalenceTable");
-        System.out.println(equivalenceTable);
+        // System.out.println("Adding Eqivalence set to EqivalenceTable");
+        // System.out.println(equivalenceTable);
     }
 
     private boolean haveLabel(int num)
@@ -170,7 +170,7 @@ class SequencialConnectedComponent
     public void startProcess()
     {
         // System.out.println("BEFORE PROCESSING CONNECTED COMPONENTS\n");
-        System.out.println("PROCESSING CONNECTED COMPONENTS\n");
+        // System.out.println("PROCESSING CONNECTED COMPONENTS\n");
         // System.out.println("processing connected components....");
         // Character[][] emptyMap = MatrixUtils.zerolike(map);
         // assert (emptyMap.length == map.length && emptyMap[0].length == map[0].length);
@@ -241,13 +241,13 @@ class SequencialConnectedComponent
         }
 
         // empty Map is no empty anymore.
-        MatrixUtils.printMatrix2D(map);
+        // MatrixUtils.printMatrix2D(map);
     }
 
     //NOTE - use uncleaned-labeled map & equivalent table
     public void reconstructMap()
     {
-        System.out.println("After reconstructing");
+        // System.out.println("After reconstructing");
         for (int i = 0; i < map.length; i++)
         {
             for (int j = 0; j < map[0].length; j++)
@@ -269,7 +269,7 @@ class SequencialConnectedComponent
                 }
             }
         }
-        MatrixUtils.printMatrix2D(map);
+        // MatrixUtils.printMatrix2D(map);
     }
 
     public void countConnectedComponentWithSizes()
@@ -320,7 +320,9 @@ class Map
 
     public void fullfillMapFromString(String s)
     {
-        System.out.println("slen = " + s.length());
+        // System.out.println("slen = " + s.length());
+        // System.out.println("String s is " );
+        // System.out.println(s);
         int x = 0;
         int y = 0;
         for (int i = 0; i < s.length(); i++)
@@ -394,35 +396,40 @@ class Map
 
 public class ConnectedIsland {
     public static void main(String[] args) {
-        // Scanner sc = new Scanner(System.in);
-        // // int nrow = sc.nextInt();
-        // // int ncol = sc.nextInt();
-        // String rc = sc.nextLine();
-        // String[] splited = rc.split(" ");
-        // final int nrow = Integer.parseInt(splited[0]);
-        // final int ncol = Integer.parseInt(splited[1]);
-        // // String mapString = Utils.getMatrixInput(nrow);
-        // StringBuilder sb = new StringBuilder("");
-        // for (int i = 0; i < nrow; i++)
-        // {
-        //     String s = sc.nextLine();
-        //     // System.out.println("s" + s);
-        //     sb.append(s);
-        // }
-        // sc.close();
-        // String mapString = sb.toString().trim();
-        // Map M = new Map(nrow, ncol);
+        Scanner sc = new Scanner(System.in);
+        // int nrow = sc.nextInt();
+        // int ncol = sc.nextInt();
 
-        Map M = new Map(8, 13);
-        String mapString = """
-            0 0 X 0 0 0 0 X 0 0 0 0 0
-            0 0 0 0 0 0 0 X X X 0 0 0
-            0 X X 0 X 0 0 0 0 0 0 0 0
-            0 X 0 0 X X 0 0 X 0 X 0 0
-            0 X 0 0 X X 0 0 X X X 0 0
-            0 0 0 0 0 0 0 0 0 0 X 0 0
-            0 0 0 X 0 0 0 X X X 0 0 0
-            0 0 X X 0 0 0 X X 0 0 0 0""";
+        String rc = sc.nextLine();
+        String[] splited = rc.split(" ");
+        final int nrow = Integer.parseInt(splited[0]);
+        final int ncol = Integer.parseInt(splited[1]);
+        // String mapString = Utils.getMatrixInput(nrow);
+        StringBuilder sb = new StringBuilder("");
+        // for (int i = 0; i < nrow * ncol; i++)
+        for (int i = 0; i < nrow; i++)
+        {
+            // String s = sc.next();
+            String s = sc.nextLine();
+            // System.out.println("s" + s);
+            sb.append(s);
+            sb.append("\n");
+            // System.out.println(i);
+        }
+        sc.close();
+        String mapString = sb.toString().trim();
+        Map M = new Map(nrow, ncol);
+
+        // Map M = new Map(8, 13);
+        // String mapString = """
+        //     0 0 X 0 0 0 0 X 0 0 0 0 0
+        //     0 0 0 0 0 0 0 X X X 0 0 0
+        //     0 X X 0 X 0 0 0 0 0 0 0 0
+        //     0 X 0 0 X X 0 0 X 0 X 0 0
+        //     0 X 0 0 X X 0 0 X X X 0 0
+        //     0 0 0 0 0 0 0 0 0 0 X 0 0
+        //     0 0 0 X 0 0 0 X X X 0 0 0
+        //     0 0 X X 0 0 0 X X 0 0 0 0""";
         
                 
         M.fullfillMapFromString( mapString);
@@ -430,9 +437,10 @@ public class ConnectedIsland {
         // Integer[][] zeroMat = MatrixUtils.zerolike(M.map);
         // MatrixUtils.printMatrix2D(zeroMat);
         // MatrixUtils.printMatrix2D(M.map);
+
         Integer[][] binaryMap = M.verboseToBinaryMap();
-        System.out.println("binary map");
-        MatrixUtils.printMatrix2D(binaryMap);
+        // System.out.println("binary map");
+        // MatrixUtils.printMatrix2D(binaryMap);
 
         SequencialConnectedComponent scc = new SequencialConnectedComponent(binaryMap);
         // MatrixUtils.printMatrix2D(scc.map);
@@ -447,16 +455,18 @@ public class ConnectedIsland {
         for (int i = 0; i < scc.components.size(); i++)
         {
             SequencialConnectedComponent.Component c = scc.components.get(i);
-            System.out.println(c);
-            System.out.println(c.points);
-            System.out.println("-----------------------");
+            // System.out.println(c);
+            // System.out.println(c.points);
+            // System.out.println("-----------------------");
             if (c.size > maxSize)
             {
                 maxSize = c.size;
             }
         }
-        System.out.println("How many Islands --> " + numberOfIslands);
-        System.out.println("Biggest Island Size  --> " + maxSize);
+        // System.out.println("How many Islands --> " + numberOfIslands);
+        // System.out.println("Biggest Island Size  --> " + maxSize);
+        System.out.println(maxSize);
+        System.out.println(numberOfIslands);
         // System.out.println(scc.components);
 
         // System.out.println("Finding the Maxima Island...");

@@ -17,6 +17,7 @@ typedef struct SMat {
     SMat(int c, int r);
     Row &operator[](int i);
     float &operator()(int i, int j);
+    // float *operator()(int r, int c);
     SMat* operator*(float scalar);
 } Mat;
 
@@ -39,37 +40,9 @@ Mat *cofactorMatrix(Mat *m);
 Mat *transpose(Mat *m);
 Mat* inverseMatrix(Mat* m);
 void inverseCalculator();
+Mat* flatToMat(int row, int col, float flattenArray[]);
+void binaryPrint(Mat *m);
 
 
-// // template <typename T>
-// typedef struct SMat {
-// // class Mat {
-//     int row;
-//     int col;
-//     typedef vector<int> Row;
-//     vector<Row> data;
-//     // int data[][];
-
-//     SMat(int c, int r);
-//     // col(c), row(r), data(r, Row(c))
-//     // {
-//     //     for (int i = 0; i < r; i++)
-//     //     {
-//     //         data[i] = Row(c);
-//     //         // data.push_back(Row(c));
-//     //     }
-
-//     // }
-//     // col(c), row(r), data(r, vector<int>(col)) { }
-
-//     Row &operator[](int i);
-//     // {
-//     //     return data[i];
-//     // }
-//     int &operator()(int i, int j);
-//     // {
-//     //     return data[i][j];
-//     // }
-// } Mat;
 
 #endif

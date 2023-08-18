@@ -11,50 +11,72 @@
 static void testmat()
 {
     // vector<int> firstRow = vector<int>();
-    int a[] = {1, 2, 3, 4};
-    vector<int> firstRow(a, a + (sizeof(a) / sizeof(a[0])));
-    // firstRow[0] = 1;
-    // Mat m(2, 2);
-    // m.data[0][0] = 9;
-    Mat* A = new Mat(2, 2);
-    (*A)(0, 0) = -2;
-    (*A)(0, 1) = 1;
-    (*A)(1, 0) = 0;
-    (*A)(1, 1) = 4;
+    // int a[] = {1, 2, 3, 4};
+    // vector<int> firstRow(a, a + (sizeof(a) / sizeof(a[0])));
+    // // firstRow[0] = 1;
+    // // Mat m(2, 2);
+    // // m.data[0][0] = 9;
+    // Mat* A = new Mat(2, 2);
+    // (*A)(0, 0) = -2;
+    // (*A)(0, 1) = 1;
+    // (*A)(1, 0) = 0;
+    // (*A)(1, 1) = 4;
 
-    Mat B(2, 2);
-    B(0, 0) = 6;
-    B(0, 1) = 5;
-    B(1, 0) = -7;
-    B(1, 1) = 1;
+    // Mat B(2, 2);
+    // B(0, 0) = 6;
+    // B(0, 1) = 5;
+    // B(1, 0) = -7;
+    // B(1, 1) = 1;
 
-    Mat C(3, 3);
-    C(0, 0) = 2;
-    C(0, 1) = 3;
-    C(0, 2) = 4;
-    C(1, 0) = 3;
-    C(1, 1) = 9;
-    C(1, 2) = 8;
-    C(2, 0) = 1;
-    C(2, 1) = 3;
-    C(2, 2) = 8;
+    // Mat C(3, 3);
+    // C(0, 0) = 2;
+    // C(0, 1) = 3;
+    // C(0, 2) = 4;
+    // C(1, 0) = 3;
+    // C(1, 1) = 9;
+    // C(1, 2) = 8;
+    // C(2, 0) = 1;
+    // C(2, 1) = 3;
+    // C(2, 2) = 8;
     // Mat* m = randmat(4, 4, 0, 10);
 
     // printf("test : %d\n", m->data[2][0]);
     // printmat(m);
 
     // prettyprint(A);
-    prettyprint(&C);
-    Mat *cof_C = cofactorMatrix(&C);
-    prettyprint(cof_C);
+    // prettyprint(&C);
+    // Mat *cof_C = cofactorMatrix(&C);
+    // prettyprint(cof_C);
 
     // prettyprint(transpose(cof_C));
-    printf("det of C = %f\n", det(&C));
-    prettyprint(inverseMatrix(&C));
+    // printf("det of C = %f\n", det(&C));
+    // prettyprint(inverseMatrix(&C));
 
     // prettyprint(matmul(A, &B));
     // cout << "det of A is : " << det(&B) << endl;
 
+}
+
+static int test_matmul()
+{
+    std::cout << "Testing matrix multiplication\n";
+    float p_inputs[] = {
+        1, 0, 0, 0,
+        0, 1, 0, 0,
+        0, 0, 1, 0,
+    };
+    float flatpos[] = {0, 2, 3, 1};
+    Mat *pinholeCam = flatToMat(3, 4, p_inputs);
+    Mat *pos3D = flatToMat(4, 1, flatpos);
+    prettyprint(pinholeCam);
+    prettyprint(pos3D);
+
+    std::cout << "matmul : \n";
+    Mat *mul = matmul(pinholeCam, pos3D);
+    prettyprint(mul);
+
+    // Mat
+    return (0);
 }
 
 int main(void)
@@ -62,6 +84,7 @@ int main(void)
     // detcalc();
     // gtk
     // testmat();
-    inverseCalculator();
+    // inverseCalculator();
+    test_matmul();
     return (0);
 }

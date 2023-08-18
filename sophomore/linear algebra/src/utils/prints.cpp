@@ -34,7 +34,7 @@ void prettyprint(Mat *m)
     printf("dimension = [%d,%d]\n", m->row, m->col);
 
     // cout << endl << "_________________________" << endl;
-    cout << get8dash(m->row)<< endl;
+    cout << get8dash(m->col)<< endl;
     for (int i = 0; i < m->row; i++)
     {
         cout << "| ";
@@ -48,7 +48,31 @@ void prettyprint(Mat *m)
             printf("%.2f\t|", (*m)(i, j));
         }
         // cout << endl << "_________________________" << endl;
-        cout << endl << get8dash(m->row) << endl;
+        cout << endl << get8dash(m->col) << endl;
+        cout << endl;
+    }
+}
+
+
+void binaryPrint(Mat *m)
+{
+    for (int i = 0; i < m->row; i++)
+    {
+        // cout << "| ";
+        for (int j = 0; j < m->col; j++)
+        {
+            // printf("%.2f\t|", (*m)(i, j));
+            float v = (*m)(i, j);
+            if (v == 0)
+            {
+                std::cout << "ø";
+            }
+            else
+            {
+                std::cout << "x";
+            }
+        }
+        // cout << endl << get8dash(m->col) << endl;
         cout << endl;
     }
 }
