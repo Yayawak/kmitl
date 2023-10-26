@@ -1,4 +1,7 @@
 #include "src/include/linalg.h"
+#include <chrono>
+#include <cstdlib>
+#include <thread>
 #include <vector>
 // #include <gtk/gui.h>
 // #include <gtk/gtk.h>
@@ -57,25 +60,68 @@ static void testmat()
 
 }
 
-static int test_matmul()
+static int test_matmul(float sensitivity)
 {
-    std::cout << "Testing matrix multiplication\n";
+    // std::cout << "Testing matrix multiplication\n";
     float p_inputs[] = {
         1, 0, 0, 0,
+        // sensitivity, 0, 0, 0,
         0, 1, 0, 0,
+        // 0, sensitivity, 0, 0,
         0, 0, 1, 0,
     };
-    float flatpos[] = {0, 2, 3, 1};
+    // float flatpos[] = {0, 2, 3, 1};
     Mat *pinholeCam = flatToMat(3, 4, p_inputs);
-    Mat *pos3D = flatToMat(4, 1, flatpos);
-    prettyprint(pinholeCam);
-    prettyprint(pos3D);
+    // Mat *pos3D = flatToMat(4, 1, flatpos);
+    // prettyprint(pinholeCam);
+    // prettyprint(pos3D);
 
-    std::cout << "matmul : \n";
-    Mat *mul = matmul(pinholeCam, pos3D);
-    prettyprint(mul);
+    // std::cout << "matmul : \n";
+    // Mat *pos2d = matmul(pinholeCam, pos3D);
+    // Vec3 *vecPos2d = matToVec(pos2d);
+    
+    // prettyprint(pos2d);
+    // FIXME this function still bug on vec3
+    // prettyprint(vecPos2d);
+    // Vec3 
 
-    // Mat
+    int size = 40;
+    // Mat *map = zeros(20, 20);
+    Mat *map = zeros(size, size);
+    // Mat *map = zeros(10, 10);
+    // Mat *map = zeros(40, 40);
+    // prettyprint(map);
+    // matdrain(map, vecPos2d, 1);
+    
+    //SECTION making data (3d positions)
+    float x = 0;
+    float stepX = 0.1f; // essential as y
+    // binaryPrint(map);
+    while (x < size)
+    {
+        // float y = 10 * sin(x * 0.51f);
+        float y = 10 * sin(x * sensitivity);
+        // int z = x * 1.1f;
+        // float z = x * 0.1f;
+        float z = 1; // no essential 
+        // float z = x;
+        if (y > size)  break;
+        if (x > size)  break;
+        // if (x > 20) 
+        // printf("[%f, %f, %f]\n", x, y, z);
+        // (int)
+        float flatpos[] = {x, y, z, 1.0f};
+        Mat *pos3D = flatToMat(4, 1, flatpos);
+        Mat *pos2d = matmul(pinholeCam, pos3D);
+        Vec3 *vecPos2d = matToVec(pos2d);
+
+        matdrain(map, pos2d, 1);
+
+        x += stepX;
+    }
+
+    std::cout << "---------------------\n";
+    binaryPrint(map);
     return (0);
 }
 
@@ -85,6 +131,18 @@ int main(void)
     // gtk
     // testmat();
     // inverseCalculator();
-    test_matmul();
+
+    // float senst = 0.01f;
+    // while (true)
+    // {
+    //     if (senst > 1.f)
+    //         senst = 0;
+    //     test_matmul(senst);
+    //     senst += 0.01f;
+    //     this_thread::sleep_for(std::chrono::nanoseconds(100000000 / 2));
+    //     system("clear");
+    // }
+    guassianElimination();
+
     return (0);
 }
