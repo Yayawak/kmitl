@@ -1,0 +1,5 @@
+AABBCC
+
+
+
+I will be printed in file dummy.txt
