@@ -1,12 +1,14 @@
 package Assignment_1_Newyear.View.Components.CustomImage;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.MouseInfo;
 import java.awt.Point;
 
 import Assignment_1_Newyear.View.Center.Center;
 import Assignment_1_Newyear.View.Center.StatusPanel;
 import Lab2LineAlgorithms.Drawing;
+import Lab2LineAlgorithms.Line;
 import Lab2LineAlgorithms.LineAlgorithms;
 
 public class PencilTool extends CustomImagePanel {
@@ -23,15 +25,17 @@ public class PencilTool extends CustomImagePanel {
 
     enum PencilState
     {
-        initing,
+        // initing,
         firstClick,
         secondClick,
+        deactivate,
         // waiting,
         // idle
     }
 
     // PencilState currentState = PencilState.idle;
-    public PencilState currentState = PencilState.initing;
+    // public PencilState currentState = PencilState.initing;
+    public PencilState currentState;
     public Point doublePoints[] = new Point[2];
 
     public PencilTool(String path) {
@@ -53,15 +57,18 @@ public class PencilTool extends CustomImagePanel {
         }
         System.out.printf("Drawing Line from %s -> %s\n", doublePoints[0], doublePoints[1]);
         Drawing.getG().setColor(Color.orange);
-        LineAlgorithms.bshLine(doublePoints[0], doublePoints[1]);
+        // LineAlgorithms.bshLine(doublePoints[0], doublePoints[1]);
 
-        Drawing.getG().setColor(Color.red);
-        LineAlgorithms.bshLine(0, 0 , 400, 400);
+        // Drawing.getG().setColor(Color.red);
+        // LineAlgorithms.bshLine(0, 0 , 400, 400);
 
-        Drawing.drawGeneralDot(doublePoints[0], 10);
+        // Drawing.drawGeneralDot(doublePoints[0], 10);
 
-        Center.getInstance().repaint();
-        Center.getInstance().revalidate();
+        Center.getInstance().addShape(new Line(
+            doublePoints[0], doublePoints[1]
+        ));
+        // Center.getInstance().repaint();
+        // Center.getInstance().revalidate();
     }
 
     public void swapClickLogic(Point p)
@@ -71,23 +78,25 @@ public class PencilTool extends CustomImagePanel {
                 currentState = PencilState.secondClick;
                 // doublePoints[0] = MouseInfo.getPointerInfo().getLocation();
                 doublePoints[0] = p;
+                Center.getInstance().setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
                 break;
             case secondClick:
                 currentState = PencilState.firstClick;
                 doublePoints[1] = p;
+                Center.getInstance().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
                 draw();
                 break;
             default:
                 break;
         }
         StatusPanel.getInstance().setString(currentState.toString());
-        System.out.println(currentState.toString());
+        // System.out.println(currentState.toString());
     }
 
     @Override
     protected void onclick() {
         System.out.println("click to use pencil tool");
-        System.out.println(currentState.toString());
+        // System.out.println(currentState.toString());
         // currentState = PencilState.initing;
         currentState = PencilState.firstClick;
 

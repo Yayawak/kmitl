@@ -41,6 +41,8 @@ public class Triangle extends PrimaryShape
         // drawTrig();
     }
 
+
+
     public void drawTrig()
     {
         Drawing.drawTriangle(points, color);
@@ -91,5 +93,10 @@ public class Triangle extends PrimaryShape
 
         // return (a.y - b.y) / (bot);
         return (-a.y + b.y) / (bot);
+    }
+
+    @Override
+    public void draw() {
+        drawTrig();
     }
 }

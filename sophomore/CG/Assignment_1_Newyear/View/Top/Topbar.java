@@ -21,7 +21,7 @@ public class Topbar extends JPanel {
     private Topbar()
     {
         System.out.println("Setting up Topper");
-        setBackground(Color.blue);
+        setBackground(Color.decode("#364F6B"));
         // add(new JLabel("Topbar"));
 
         // var pencilPanel = new JPanel();

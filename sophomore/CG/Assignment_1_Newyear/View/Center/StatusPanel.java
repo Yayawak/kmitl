@@ -14,14 +14,14 @@ public class StatusPanel extends JPanel
 
     public StatusPanel()
     {
-        setBackground(Color.ORANGE);
+        setBackground(Color.decode("#FC5085"));
         setString("default status");
         add(label);
     }
 
     public void setString(String s)
     {
-        System.out.println("set string : " + s);
+        // System.out.println("set string : " + s);
         label.setText(s);
         // label.revalidate();
         revalidate();
