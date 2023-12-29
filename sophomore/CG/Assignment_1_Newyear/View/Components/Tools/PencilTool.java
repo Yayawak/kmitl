@@ -1,14 +1,16 @@
-package Assignment_1_Newyear.View.Components.CustomImage;
+package Assignment_1_Newyear.View.Components.Tools;
 
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.MouseInfo;
 import java.awt.Point;
 
+import Assignment_1_Newyear.Model.Line;
+import Assignment_1_Newyear.Model.LineWidthState;
 import Assignment_1_Newyear.View.Center.Center;
 import Assignment_1_Newyear.View.Center.StatusPanel;
+import Assignment_1_Newyear.View.Center.Center.CenterState;
 import Lab2LineAlgorithms.Drawing;
-import Lab2LineAlgorithms.Line;
 import Lab2LineAlgorithms.LineAlgorithms;
 
 public class PencilTool extends CustomImagePanel {
@@ -23,7 +25,7 @@ public class PencilTool extends CustomImagePanel {
         return ins;
     }
 
-    enum PencilState
+    public enum PencilState
     {
         // initing,
         firstClick,
@@ -33,15 +35,14 @@ public class PencilTool extends CustomImagePanel {
         // idle
     }
 
-    // PencilState currentState = PencilState.idle;
-    // public PencilState currentState = PencilState.initing;
-    public PencilState currentState;
+    public PencilState currentState = PencilState.deactivate;
     public Point doublePoints[] = new Point[2];
 
     public PencilTool(String path) {
         super(path);
 
     }
+
 
     public void draw()
     {
@@ -56,7 +57,7 @@ public class PencilTool extends CustomImagePanel {
             return;
         }
         System.out.printf("Drawing Line from %s -> %s\n", doublePoints[0], doublePoints[1]);
-        Drawing.getG().setColor(Color.orange);
+        // Drawing.getG().setColor(Color.orange);
         // LineAlgorithms.bshLine(doublePoints[0], doublePoints[1]);
 
         // Drawing.getG().setColor(Color.red);
@@ -64,9 +65,10 @@ public class PencilTool extends CustomImagePanel {
 
         // Drawing.drawGeneralDot(doublePoints[0], 10);
 
-        Center.getInstance().addShape(new Line(
+        var l = new Line(
             doublePoints[0], doublePoints[1]
-        ));
+        );
+        Center.getInstance().addShape(l);
         // Center.getInstance().repaint();
         // Center.getInstance().revalidate();
     }
@@ -96,6 +98,7 @@ public class PencilTool extends CustomImagePanel {
     @Override
     protected void onclick() {
         System.out.println("click to use pencil tool");
+        Center.getInstance().currentState = CenterState.pencil;
         // System.out.println(currentState.toString());
         // currentState = PencilState.initing;
         currentState = PencilState.firstClick;

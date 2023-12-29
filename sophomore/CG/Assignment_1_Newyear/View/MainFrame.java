@@ -27,6 +27,8 @@ public class MainFrame extends JFrame {
         setSize(screenWidth, screenHeight);
         setLocationRelativeTo(null);
         setResizable(false);
+        // setTitle("Happy New Year, Goodbye. 🐈");
+        setTitle("Happy New Year, Goodbye.");
 
         setUIByAbsolute();
 

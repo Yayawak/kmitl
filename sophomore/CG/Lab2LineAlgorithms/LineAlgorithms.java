@@ -148,6 +148,11 @@ public class LineAlgorithms extends Drawing {
         bshLine(p1.x, p1.y, p2.x, p2.y);
     }
 
+    public static void bshLine(Point p1, Point p2, int size)
+    {
+        bshLine(p1.x, p1.y, p2.x, p2.y, size);
+    }
+
     public static void bshLine(int x1, int y1, int x2, int y2)
     {
         bshLine(x1, y1, x2, y2, 1);

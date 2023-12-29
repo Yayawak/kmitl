@@ -15,15 +15,15 @@ import javax.swing.JScrollPane;
 import Assignment_1_Newyear.Controller.ImageApi;
 import Assignment_1_Newyear.Model.PrimaryShape;
 import Assignment_1_Newyear.View.MainFrame;
-import Assignment_1_Newyear.View.Components.CustomImage.CustomImagePanel;
-import Assignment_1_Newyear.View.Components.CustomImage.PencilTool;
+import Assignment_1_Newyear.View.Components.Tools.CustomImagePanel;
+import Assignment_1_Newyear.View.Components.Tools.PencilTool;
 
 public class Sidebar extends JScrollPane {
     private static Sidebar ins;
     public static Sidebar getInstance() { if (ins == null) {ins = new Sidebar();} return ins;}
     private int totalRows = 0;
 
-    JPanel mainPanel = new JPanel();
+    public JPanel mainPanel = new JPanel();
 
 
     private Sidebar()
@@ -58,10 +58,16 @@ public class Sidebar extends JScrollPane {
         mainPanel.add(wrapperRow);
         totalRows++;
         repaint();
+        revalidate();
     }
 
     public int getTotalRows() {
         return totalRows;
+    }
+
+    public void clearAll()
+    {
+        mainPanel.removeAll();
     }
 
 

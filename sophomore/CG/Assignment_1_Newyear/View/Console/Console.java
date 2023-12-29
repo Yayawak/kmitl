@@ -18,8 +18,8 @@ import javax.swing.JTextArea;
 import Assignment_1_Newyear.Controller.ImageApi;
 import Assignment_1_Newyear.Model.PrimaryShape;
 import Assignment_1_Newyear.View.MainFrame;
-import Assignment_1_Newyear.View.Components.CustomImage.CustomImagePanel;
-import Assignment_1_Newyear.View.Components.CustomImage.PencilTool;
+import Assignment_1_Newyear.View.Components.Tools.CustomImagePanel;
+import Assignment_1_Newyear.View.Components.Tools.PencilTool;
 
 public class Console extends JScrollPane {
 // public class Console extends JPanel {
@@ -32,7 +32,9 @@ public class Console extends JScrollPane {
     private Console()
     {
         textArea = new JTextArea(100, 20);
-        textArea.setBackground(Color.decode("#9B6BDF"));
+        // textArea.setBackground(Color.decode("#9B6BDF"));
+        // textArea.setBackground(Color.decode("#FB5086"));
+        textArea.setBackground(Color.decode("#364F6B"));
         Dimension size = new Dimension(
                 (int)(MainFrame.screenWidth * 0.2f),
                 (int)(MainFrame.screenHeight * 0.2f)
@@ -64,7 +66,7 @@ public class Console extends JScrollPane {
     public void addRowString(String s)
     {
         // totalRows++;
-        textArea.append(s);
+        textArea.append(s + "\n");
         // textArea.append("Hello");
         // textArea.revalidate();
         revalidate();

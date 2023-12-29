@@ -1,8 +1,10 @@
-package Lab2LineAlgorithms;
+package Assignment_1_Newyear.Model;
 
 import java.awt.Point;
 
-import Assignment_1_Newyear.Model.PrimaryShape;
+import Assignment_1_Newyear.View.Components.Tools.LineWidthTool;
+import Lab2LineAlgorithms.Drawing;
+import Lab2LineAlgorithms.LineAlgorithms;
 
 public class Line extends PrimaryShape {
     public Point start;
@@ -19,7 +21,10 @@ public class Line extends PrimaryShape {
 
     @Override
     public void draw() {
-        LineAlgorithms.bshLine(start, end);
+        Drawing.getG().setColor(color);
+        // LineAlgorithms.bshLine(start, end);
+        // LineAlgorithms.bshLine(start, end, LineWidthTool.getInstance().getSizePixel());
+        LineAlgorithms.bshLine(start, end, LineWidthTool.getSizePixel(widthState));
     }
 
     @Override

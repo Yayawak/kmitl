@@ -45,6 +45,7 @@ public class Triangle extends PrimaryShape
 
     public void drawTrig()
     {
+        // Drawing.getG().setColor(color);
         Drawing.drawTriangle(points, color);
     }
 

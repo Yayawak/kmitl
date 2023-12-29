@@ -2,8 +2,10 @@ package Assignment_1_Newyear.View.Center;
 
 import java.awt.Color;
 
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 
 public class StatusPanel extends JPanel
 {
@@ -15,6 +17,8 @@ public class StatusPanel extends JPanel
     public StatusPanel()
     {
         setBackground(Color.decode("#FC5085"));
+        Border blackline = BorderFactory.createLineBorder(Color.black);
+        setBorder(blackline);
         setString("default status");
         add(label);
     }

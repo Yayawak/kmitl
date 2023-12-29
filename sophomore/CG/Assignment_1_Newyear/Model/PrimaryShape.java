@@ -4,7 +4,9 @@ import java.awt.Color;
 
 public abstract class PrimaryShape {
     public int id;
-    public Color color;
+    public Color color = Color.black;
+    public LineWidthState widthState = LineWidthState.small;
+
     public abstract void draw();
 
     @Override

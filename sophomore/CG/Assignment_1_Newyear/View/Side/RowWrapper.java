@@ -21,7 +21,10 @@ public class RowWrapper extends JPanel {
         label.setText(shape.toString());
         this.index = index;
         // color = shape.color;
-        color = index % 2 == 0 ? Color.red : Color.gray;
+        Color a = Color.decode("#1BE6CC");
+        Color b = Color.decode("#009B9D");
+        // color = index % 2 == 0 ? Color.red : Color.gray;
+        color = index % 2 == 0 ? a : b;
         setBackground(color);
         // Dimension size = new Dimension(
         //         // 100, 25

@@ -1,4 +1,4 @@
-package Assignment_1_Newyear.View.Components.CustomImage;
+package Assignment_1_Newyear.View.Components.Tools;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -27,8 +27,22 @@ public abstract class CustomImagePanel extends JPanel {
                 // System.out.println("Clicked");
                 onclick();
             }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                // System.out.println("Entered");
+                onEnter();
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                onExit();
+            }
         });
     }
 
     protected abstract void onclick();
+    protected void onEnter() {}
+    protected void onExit() {}
+
 }

@@ -1,20 +1,28 @@
 package Assignment_1_Newyear.Controller;
 
+import java.awt.Color;
 import java.awt.Point;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import Assignment_1_Newyear.Model.Curve;
+import Assignment_1_Newyear.Model.FloodModel;
+import Assignment_1_Newyear.Model.Line;
+import Assignment_1_Newyear.Model.LineWidthState;
 import Assignment_1_Newyear.Model.PrimaryShape;
-import Lab2LineAlgorithms.Line;
+import Assignment_1_Newyear.View.Center.Center;
 
 public class ShapeReaderWriter {
-    private static String pathToMemFile = "Assignment_1_Newyear/data/Memory.csv";
+    public static String pathToMemFile = "Assignment_1_Newyear/data/Memory.csv";
     static File file = new File(pathToMemFile);
 
     private static void appendToFile(String message) {
@@ -31,7 +39,7 @@ public class ShapeReaderWriter {
         int id = 99;
         if (shape instanceof Line) {
             Line l = (Line) shape;
-            System.out.println("Writing Line to Memory");
+            System.out.println("Writing Line to Memory\n");
             // appendToFile(pathToMemFile);
             // String s = String.format(
             //         "id : %d~ type : line~ points : p0[%d,%d], p1[%d,%d]",
@@ -42,112 +50,140 @@ public class ShapeReaderWriter {
 // id : 99~ type : line~ points : p0[124,150], p1[458,366]
 // id : 99~ type : line~ points : p0[512,104], p1[248,368]
             String s = String.format(
-                "line, %d, %d, %d, %d, %d",
+                "line, %d, %s, %s, %d, %d, %d, %d",
                     id,
-                    l.start.x, l.start.y,
-                    l.end.x, l.end.y);
+                    ColorUtils.rgbToHex(shape.color),
+                    shape.widthState.toString(),
+                    l.start.x,
+                     l.start.y,
+                    l.end.x,
+                     l.end.y);
             appendToFile(s);
-        } else {
+        } 
+        else if (shape instanceof Curve)
+        {
+            Curve c = (Curve)shape;
+            System.out.println("Writing Curve to Memory\n");
+            String s = String.format(
+                "curve, %d, %s, %s, %d, %d, %d, %d, %d, %d, %d, %d",
+                    id,
+                    ColorUtils.rgbToHex(shape.color),
+                    shape.widthState.toString(),
+                    c.start.x, c.start.y,
+                    c.end.x, c.end.y,
+                    c.control1.x, c.control1.y,
+                    c.control2.x, c.control2.y
+                );
+            appendToFile(s);
+
+        }
+        else if (shape instanceof FloodModel)
+        {
+            FloodModel f = (FloodModel)shape;
+            System.out.println("Writing Flood-data to Memory\n");
+            String s = String.format(
+                "flood, %d, %s, %s, %d, %d",
+                    id,
+                    ColorUtils.rgbToHex(f.oldColor),
+                    ColorUtils.rgbToHex(f.replacementColor),
+                    f.targetPos.x,
+                    f.targetPos.y
+                );
+            appendToFile(s);
+
+        }
+        else {
             System.out.println("unknow shape -> don't write to file");
         }
     }
 
-    // private static PrimaryShape decoder(String encodedString)
-    // {
-    //     int start_type_index = encodedString.indexOf("type");
-    //     String remainding = encodedString.substring(start_type_index, encodedString.length());
-    //     // System.out.println(remainding);
-    //     int after_type_tildIndex = remainding.indexOf("~");
-    //     // System.out.println(after_type_tildIndex);
-    //     // String typeName = encodedString.substring(start_type_index, after_type_tildIndex);
-    //     // System.out.println(start_type_index);
-    //     // System.out.println(after_type_tildIndex);
-    //     String x = encodedString.substring(start_type_index, start_type_index + after_type_tildIndex);
-    //     x = x.split(":")[1].strip();
-    //     String typeName = x;
-    //     //     .split(":")[0];
-    //     // System.out.println(typeName);
-    //     System.out.println(typeName);
-
-
-    //     if (typeName.equals("line"))
-    //     {
-    //         int start_points_idx = encodedString.indexOf("points");
-    //         int count_closeSqaureBracket = 0;
-    //         int second_csb_index = start_points_idx;
-    //         while (start_points_idx < encodedString.length())
-    //         {
-    //             if (count_closeSqaureBracket == 2)
-    //             {
-    //                 break;
-    //             }
-    //             if (encodedString.charAt(second_csb_index) == ']')
-    //             {
-    //                 count_closeSqaureBracket++;
-    //             }
-    //             second_csb_index++;
-    //         }
-    //         // System.out.println("second csb index = " + second_csb_index);
-
-    //         String interestingS = encodedString.substring(start_points_idx, second_csb_index);
-    //         interestingS = interestingS.split(":")[1].strip();
-    //         System.out.println(interestingS);
-
-    //         // Pattern p = Pattern.compile("\\d+");
-    //         Pattern p0 = Pattern.compile("\\[(\\d+),(\\d+)\\]");
-    //         // Matcher m = p.matcher("string1234more567string890");
-    //         Matcher m0 = p0.matcher(interestingS);
-    //         int coords[] = new int[4];
-    //         int i = 0;
-    //         while (m0.find()) 
-    //         {
-    //             // output of outter while is [124,150] somthing likethat -> so we want to extract 124 and 150 using innner loop
-    //             var p1 = Pattern.compile("\\d+");
-    //             var m1 = p1.matcher(m0.group());
-    //             while (m1.find())
-    //             {
-    //                 // System.out.println(m1.group());
-    //                 coords[i++] = Integer.valueOf(m1.group());
-    //             }
-    //             // System.out.println("g -> " + m0.group());
-    //         }
-
-    //         return new Line(
-    //             new Point(coords[0], coords[1]),
-    //             new Point(coords[2], coords[3])
-    //         );
-    //     } 
-    //     else if (typeName.equals("triangle")) 
-    //     {
-
-    //     } else 
-    //     {
-    //         System.err.println("Invalid Type readed from Memory.txt");
-    //         System.exit(1);
-    //     }
-
-    //     return null;
-    // }
 
     public static PrimaryShape decoder(String encodedS)
     {
+        assert (encodedS != null);
         String arr[] = encodedS.split(",");
+        assert arr.length > 1;
+        // System.out.println(Arrays.toString(arr));
+        // System.out.println(encodedS);
+
+        for (int i = 0; i < arr.length; i++)
+        {
+            // arr[i] = arr[i].strip();
+            arr[i] = arr[i].trim();
+            // arr[i].replaceAll("\\p{C}", "?");
+        }
         String type = arr[0];
-        int id = Integer.valueOf(arr[1].strip());
+        // System.out.println(type);
+        // System.out.println(arr[1]);
+    // int id = Integer.parseInt(arr[1]);
+        int id = Integer.parseInt(arr[1]);
+        // Color color = Color.decode(arr[2]);
+        // LineWidthState lineWidthState = LineWidthState.valueOf(arr[3]);
+
         if (type.equals("line"))
         {
+            Color color = Color.decode(arr[2]);
+            LineWidthState lineWidthState = LineWidthState.valueOf(arr[3]);
             int coords[] = new int[4];
             for (int i = 0; i < 4; i++)
             {
-                coords[i] = Integer.valueOf(arr[2 + i].strip());
+                coords[i] = Integer.valueOf(arr[4 + i]);
             }
             var l = new Line(
                             new Point(coords[0], coords[1]),
                             new Point(coords[2], coords[3])
             );
             l.id = id;
+            l.color = color;
+            l.widthState = lineWidthState;
 
             return l;
+        }
+        else if (type.equals("curve"))
+        {
+            Color color = Color.decode(arr[2]);
+            LineWidthState lineWidthState = LineWidthState.valueOf(arr[3]);
+            int coords[] = new int[8];
+            for (int i = 0; i < 8; i++)
+            {
+                coords[i] = Integer.valueOf(arr[4 + i]);
+            }
+            var c = new Curve(
+                new Point(coords[0], coords[1]),
+                new Point(coords[2], coords[3]),
+                new Point(coords[4], coords[5]),
+                new Point(coords[6], coords[7])
+            );
+            c.id = id;
+            c.color = color;
+            c.widthState = lineWidthState;
+
+            return c;
+        }
+        else if (type.equals("flood"))
+        {
+            int coords[] = new int[2];
+            for (int i = 0; i < 2; i++)
+            {
+                coords[i] = Integer.valueOf(arr[4 + i]);
+            }
+            // new FloodModel(null, null, color, color)
+            var f = new FloodModel(
+                new Point(
+                    Integer.valueOf(arr[4]),
+                    Integer.valueOf(arr[5])
+                ),
+                // null,
+                // Center.getInstance().buffer,
+                // Center.buffer,
+                Color.decode(arr[2]),
+                Color.decode(arr[3])
+            );
+            f.id = id;
+            f.color = null;
+            f.widthState = null;
+
+            return f;
         }
         else
         {
@@ -166,8 +202,16 @@ public class ShapeReaderWriter {
             BufferedReader reader = new BufferedReader(
                     new FileReader(pathToMemFile));
             String line = reader.readLine();
+            // line.replaceAll("\\p{C}", "?");
             // System.out.println(line);
+            // while (line != null) { // * this work for multiple line -> but the below line prevents only one character existed in Memory.csv but it's can not used to decode data
+            // while (line != null && line.length() != 1) {
             while (line != null) {
+                // if (line.length() != 1) // * only remain 1 char at first line -> must delete all
+                // {
+                //     return ret;
+                // }
+                
                 // if (rowIndex == 0) {
                 // rowIndex++;
                 // columns = line.split(",");
@@ -183,6 +227,7 @@ public class ShapeReaderWriter {
 
                 // read next line
                 line = reader.readLine();
+                // line.replaceAll("\\p{C}", "?");
                 // rowIndex++;
                 // System.out.println("");
             }
@@ -193,5 +238,27 @@ public class ShapeReaderWriter {
         }
 
         return ret;
+    }
+    
+    public static void deleteLastLine() {
+        // var p = "Assignment_1_Newyear/data/mock.txt";
+        var p = pathToMemFile;
+
+        try {
+            RandomAccessFile f = new RandomAccessFile(p, "rw");
+            long length = f.length() - 1;
+            byte b = 0;
+            // while (b != 10 && length > 0) {
+            while (b != 10 && length >= 0) { // ? prevent removing first line 
+                length -= 1;
+                f.seek(length);
+                b = f.readByte();
+            }
+            f.setLength(length + 1);
+            f.close();
+            
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 }
