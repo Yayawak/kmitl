@@ -1,0 +1,8 @@
+{
+    "cmake.sourceDirectory": "/Users/rio/Desktop/kmitl/sophomore/CG/Libs/GLM/glm",
+    "files.associations": {
+        "*.embeddedhtml": "html",
+        "string": "cpp",
+        "iostream": "cpp"
+    }
+}
