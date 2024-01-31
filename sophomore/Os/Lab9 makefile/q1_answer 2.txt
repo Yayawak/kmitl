@@ -1,0 +1,5 @@
+65050988
+
+/* A */ = exitCriticalSection(0);    
+
+/* B */ = enterCriticalSection(1);

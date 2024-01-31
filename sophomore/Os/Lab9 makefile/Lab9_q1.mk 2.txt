@@ -1,0 +1,15 @@
+CC = gcc
+SRCS = lab9_q1.c peterson.c 
+OBJS = $(SRCS:.c=.o)
+TARGET = goodCnt
+
+all: $(TARGET)
+
+$(TARGET): $(OBJS)
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $(OBJS)
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c $<
+
+clean:
+	rm -f $(OBJS) $(TARGET)

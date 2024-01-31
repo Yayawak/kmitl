@@ -11,10 +11,10 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 
-import Assignment_1_Newyear.View.Center.Center;
 import Assignment_1_Newyear.View.Console.Console;
 import Assignment_1_Newyear.View.Side.Sidebar;
 import Assignment_1_Newyear.View.Top.Topbar;
+import Assignment_1_Newyear.View.Center.Center;
 
 public class MainFrame extends JFrame {
     private static MainFrame ins;

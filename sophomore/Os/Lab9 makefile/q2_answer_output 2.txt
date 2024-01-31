@@ -1,0 +1,11 @@
+65050988
+
+/* C */ sem_wait(&mySemaphore);
+
+/* D */ sem_init(&mySemaphore, 0, 1)
+
+
+OUTPUT ->
+Thread ID: 123145520787456, Last Seen: 1
+Last cnt from tid[0] is 1
+final cnt = 100001

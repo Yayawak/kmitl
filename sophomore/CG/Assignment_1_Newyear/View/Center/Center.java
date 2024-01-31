@@ -17,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import Assignment_1_Newyear.Controller.ShapeReaderWriter;
+import Assignment_1_Newyear.Controller.TimeController;
 import Assignment_1_Newyear.Model.PrimaryShape;
 import Assignment_1_Newyear.View.MainFrame;
 import Assignment_1_Newyear.View.Components.Tools.ColorSelectorTool;
@@ -43,6 +44,7 @@ public class Center extends JPanel implements MouseMotionListener{
     public ArrayList<PrimaryShape> shapes;
     public ArrayList<PrimaryShape> metaShapes = new ArrayList<>();
     // public Queue<PrimaryShape> metaShapes = new LinkedList<>();
+    private int x = 0;
 
     // private PrimaryShape singleMetaShape = null;
     public enum CenterState
@@ -75,31 +77,20 @@ public class Center extends JPanel implements MouseMotionListener{
             //     // System.out.println("Rerender all by re-reading data from Memory.");
             //     try { Thread.sleep(10000); } catch (Exception e) { }
             // }
+
+            while (true)
+            {
+                // todo : update logic
+                // Center.getInstance().
+
+                // todo : redraw logic
+                // Center.getInstance().repaint();
+            }
         }
     }
 
-    private Center()
+    private void registerListerners()
     {
-        var t = new Thread(new MonitoringThread());
-        t.start();
-
-        reinitShapesUI();
-        // setBackground(Color.lightGray);
-        // add(new JLabel("Center"));
-
-        setLayout(null);
-        var statusPanel = StatusPanel.getInstance();
-        // statusPanel.setLocation((int)(MainFrame.screenWidth * 0.8), 100);
-        statusPanel.setBounds(
-            // (int)(MainFrame.screenWidth * 0.85), 
-            (int)(MainFrame.screenWidth * 0.8 * 0.85), 
-            (int)(MainFrame.screenHeight * 0.01), 
-            100, 25
-            // statusPanel.getWidth(), statusPanel.getHeight() // notworked
-            );
-        // statusPanel.setLocation(400, 100);
-        add(statusPanel);
-
         addMouseListener(new MouseAdapter() {
             // @Override
             // public void mouseReleased(MouseEvent e) {
@@ -136,10 +127,36 @@ public class Center extends JPanel implements MouseMotionListener{
 
         });
 
+
+    }
+
+    private Center()
+    {
+        var t = new Thread(new MonitoringThread());
+        t.start();
+
+        reinitShapesUI();
+        // setBackground(Color.lightGray);
+        // add(new JLabel("Center"));
+
+        setLayout(null);
+        var statusPanel = StatusPanel.getInstance();
+        // statusPanel.setLocation((int)(MainFrame.screenWidth * 0.8), 100);
+        statusPanel.setBounds(
+            // (int)(MainFrame.screenWidth * 0.85), 
+            (int)(MainFrame.screenWidth * 0.8 * 0.85), 
+            (int)(MainFrame.screenHeight * 0.01), 
+            100, 25
+            // statusPanel.getWidth(), statusPanel.getHeight() // notworked
+            );
+        // statusPanel.setLocation(400, 100);
+        add(statusPanel);
+
         // ? for mouseMove()
         addMouseMotionListener(this);
 
         // setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        registerListerners();
     }
 
     private void drawAllShapes()
@@ -163,6 +180,26 @@ public class Center extends JPanel implements MouseMotionListener{
         // repaint();
     }
 
+    public int[][] getPixels(BufferedImage buffer)
+    {
+        int h = buffer.getHeight();
+        int w = buffer.getWidth();
+        int[][] ret = new int[h][w];
+
+        System.out.printf("h, w = %d, %d\n", h, w);
+        for (int y = 0; y < h; y++)
+        {
+            for (int x = 0; x < w; x++)
+            {
+                // System.out.printf("y, x = %d, %d\n", y, x);
+                int rgb = buffer.getRGB(x, y);
+                System.out.print(rgb);
+                ret[y][x] = rgb;
+            }
+        }
+        return ret;
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         // super.paintComponent(g);
@@ -178,6 +215,8 @@ public class Center extends JPanel implements MouseMotionListener{
 
         drawAllShapes();
 
+        System.out.println("k");
+        // getPixels(buffer);
 
         // FloodFill.floodFill(buffer, 
         //     160, 100, 
@@ -186,10 +225,17 @@ public class Center extends JPanel implements MouseMotionListener{
         //     Color.green,
         //     w, h
         // );
+        // float dt = TimeController.getInstance().getDt();
+        // System.out.println("dt " + dt);
 
+        // x = (x + 1) % w;
         Drawing.drawGrid(w, h, 15, 15);
+        // Drawing.drawGrid(x, h, 15, 15);
 
         g.drawImage(buffer, 0, 0, null);
+
+        // System.out.println("p");
+        // repaint();
     }
 
 

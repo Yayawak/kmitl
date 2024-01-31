@@ -1,0 +1,5 @@
+Q1 -> notifyAll();
+Q2 -> synchronized
+Q3 -> wait();
+Q4 -> inside
+Q5 -> public
