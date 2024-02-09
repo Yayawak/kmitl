@@ -9,7 +9,8 @@
                 "-fcolor-diagnostics",
                 "-fansi-escape-codes",
                 // "-g", "${file}",
-                "-g", "${fileDirname}/*.cpp",
+                // "-g", "${fileDirname}/*.cpp",
+                "-g", "${fileDirname}/${fileBasenameNoExtension}.cpp",
                 // "-g", "${fileDirname}/Libs/*.cpp",
 
 

@@ -4,5 +4,6 @@
         "*.embeddedhtml": "html",
         "string": "cpp",
         "iostream": "cpp"
-    }
+    },
+    "java.debug.settings.onBuildFailureProceed": true
 }
