@@ -4,7 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.util.Arrays;
 
-import src.MainAss2;
+import src.Assignment2_65050988_65050754;
 import src.Components.Food.Food;
 import src.Libs.CircleAlgorithms;
 import src.helpers.Coordinator;
@@ -119,7 +119,7 @@ public class Pacman extends Animator {
             // size *= 1.05f;
             size *= 1.2f;
 
-            MainAss2.waitForRemoveAnimObject(nearestFood);
+            Assignment2_65050988_65050754.waitForRemoveAnimObject(nearestFood);
         }
         // * facing direction to nearest food
         // double rad = Math.atan2( (double)dirToFood.y, (double)dirToFood.x);
@@ -181,7 +181,7 @@ public class Pacman extends Animator {
     {
         double minDist = Float.MAX_VALUE;
         Food minFood = null;
-        for (var f : MainAss2.anims) {
+        for (var f : Assignment2_65050988_65050754.anims) {
             if (f instanceof Food)
             {
                 double dist = f.getPos().distance(this.pos);

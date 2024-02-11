@@ -2,42 +2,30 @@
     "tasks": [
         {
             "type": "cppbuild",
-            "label": "C/C++: clang build active file",
-            // "command": "/usr/bin/clang",
+            "label": "C/C++: clang++ build active file",
             "command": "/usr/bin/clang++",
             "args": [
                 "-fcolor-diagnostics",
                 "-fansi-escape-codes",
-                // "-g", "${file}",
                 // "-g", "${fileDirname}/*.cpp",
-                "-g", "${fileDirname}/${fileBasenameNoExtension}.cpp",
-                // "-g", "${fileDirname}/Libs/*.cpp",
+                "-g", "${fileDirname}/main.cpp",
+                // "-g", "${workspaceFolder}/Libs/*.cpp",
+                "/Users/kiokize/Desktop/kmitl/sophomore/CG/opengl/Libs/*.cpp",
+
+                "-L","/opt/homebrew/Cellar/glew/2.2.0_1/lib",
+                "-L","/opt/homebrew/Cellar/glfw/3.3.9/lib",
 
 
-                // "-l", "/Users/rio/Desktop/kmitl/sophomore/CG/Libs/GLM",
-                // "-l", "/Users/rio/Desktop/kmitl/sophomore/CG/Libs/GLEW/include",
-                // "-l", "/Users/rio/Desktop/kmitl/sophomore/CG/Libs/GLFW/include",
-                // "-l", "/Users/rio/Desktop/kmitl/sophomore/CG/Libs/GLEW/bin/Release/x64",
-                // "-l", "/Users/rio/Desktop/kmitl/sophomore/CG/Libs/GLFW/lib-arm64",
+                "-l","glew",
+                "-l","glfw",
+                "-framework","Cocoa",
+                "-framework","OpenGL",
+                "-framework","IOKit",
+                "-framework","CoreVideo",
+                "-std=c++17",
+                "-o", "${fileDirname}/${fileBasenameNoExtension}"
 
 
-                // /usr/bin/clang++ -fcolor-diagnostics 
-                // -fansi-escape-codes 
-                // -g /Users/nattanan/projects/helloworld/*.cpp -std=c++17 
-                "-L", "/opt/homebrew/Cellar/glew/2.2.0_1/lib",
-                "-L", "/opt/homebrew/Cellar/glfw/3.3.9/lib",
-                // -L/opt/homebrew/Cellar/glfw/3.3.9/lib -lglfw 
-                // -framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo
-
-
-                "-l", "glew",
-                "-l", "glfw",
-                "-framework", "Cocoa",
-                "-framework", "OpenGL",
-                "-framework", "IOKit",
-                "-framework", "CoreVideo",
-
-                "-o", "${fileDirname}/${fileBasenameNoExtension}",
             ],
             "options": {
                 "cwd": "${fileDirname}"

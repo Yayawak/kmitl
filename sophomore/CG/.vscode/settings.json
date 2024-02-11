@@ -3,7 +3,8 @@
     "files.associations": {
         "*.embeddedhtml": "html",
         "string": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "vector": "cpp"
     },
     "java.debug.settings.onBuildFailureProceed": true
 }
